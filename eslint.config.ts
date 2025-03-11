@@ -21,10 +21,29 @@ export default defineConfigWithVueTs(
 
   pluginVue.configs['flat/essential'],
   vueTsConfigs.recommended,
-  
+
   {
     ...pluginVitest.configs.recommended,
     files: ['src/**/__tests__/*'],
   },
+
+  {
+    files: ['src/**/*.{ts,mts,tsx,vue}'],
+    ignores: ['**/*.test.ts', '**/*.spec.ts'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              group: ['./', '../'],
+              message: 'Relative imports are not allowed.',
+            },
+          ],
+        },
+      ],
+    },
+  },
+
   skipFormatting,
 )

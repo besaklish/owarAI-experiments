@@ -1,0 +1,23 @@
+// Breakpoints
+$breakpoint-mobile: 480px;
+$breakpoint-tablet: 768px;
+$breakpoint-pc: 1200px;
+
+// Responsive mixins
+@mixin mq($breakpoints...) {
+  @each $breakpoint in $breakpoints {
+    @if $breakpoint == mobile {
+      @media (max-width: $breakpoint-mobile) {
+        @content;
+      }
+    } @else if $breakpoint == tablet {
+      @media (max-width: $breakpoint-tablet) {
+        @content;
+      }
+    } @else if $breakpoint == pc {
+      @media (max-width: $breakpoint-pc) {
+        @content;
+      }
+    }
+  }
+}

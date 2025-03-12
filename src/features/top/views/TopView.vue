@@ -1,5 +1,5 @@
 <template>
-  <div class="layout">
+  <SimpleLayout>
     <h1>owarAI experiments</h1>
     <main>
       <div class="card-container">
@@ -13,12 +13,8 @@
         </Card>
       </div>
     </main>
-  </div>
+  </SimpleLayout>
 </template>
-
-<script setup lang="ts">
-import { Card } from 'primevue'
-</script>
 
 <style scoped lang="scss">
 @import 'src/shared/ui/styles/index.scss';
@@ -52,3 +48,8 @@ import { Card } from 'primevue'
   }
 }
 </style>
+
+<script setup lang="ts">
+import { Card } from 'primevue'
+import SimpleLayout from 'src/shared/ui/layouts/SimpleLayout.vue'
+</script>

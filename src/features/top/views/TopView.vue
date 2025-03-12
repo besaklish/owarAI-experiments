@@ -19,10 +19,6 @@
 <style scoped lang="scss">
 @use 'src/shared/ui/styles/index.scss' as *;
 
-.layout {
-  padding: 1rem;
-}
-
 .card-container {
   display: flex;
   flex-wrap: wrap;

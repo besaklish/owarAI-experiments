@@ -11,7 +11,7 @@ import { LlmTypes } from 'src/shared/llm/di/LlmTypes'
 import type { ILlmApiKeyService } from 'src/shared/llm/interfaces/ILlmApiKeyService'
 import SimpleLayout from 'src/shared/views/layouts/SimpleLayout.vue'
 import { onMounted, ref } from 'vue'
-import SetApiKeyDialog from 'src/shared/llm/views/components/SetApiKeyDialog.vue/SetApiKeyDialog.vue'
+import SetApiKeyDialog from 'src/shared/llm/views/components/SetApiKeyDialog.vue/SetLlmApiKeyDialog.vue'
 
 const llmApiKeyService = diContainer.get<ILlmApiKeyService>(LlmTypes.ApiKeyService)
 

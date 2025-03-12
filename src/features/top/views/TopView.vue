@@ -17,7 +17,7 @@
 </template>
 
 <style scoped lang="scss">
-@import 'src/shared/ui/styles/index.scss';
+@use 'src/shared/ui/styles/index.scss' as *;
 
 .layout {
   padding: 1rem;

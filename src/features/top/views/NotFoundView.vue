@@ -17,7 +17,7 @@ import { Card } from 'primevue'
 </script>
 
 <style scoped lang="scss">
-@import 'src/shared/ui/styles/index.scss';
+@use 'src/shared/ui/styles/index.scss' as *;
 
 .not-found-container {
   display: flex;

@@ -3,7 +3,7 @@
     <h1>owarAI experiments</h1>
     <main>
       <div class="card-container">
-        <Card class="feature-card">
+        <Card class="feature-card" @click="router.push(paths.script.normTwist)">
           <template #title> owarAI Script Generator </template>
           <template #content> OwarAI scripts are generated based on the theme you input. </template>
         </Card>
@@ -52,4 +52,8 @@
 <script setup lang="ts">
 import { Card } from 'primevue'
 import SimpleLayout from 'src/shared/ui/layouts/SimpleLayout.vue'
+import { paths } from 'src/shared/router/paths'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 </script>

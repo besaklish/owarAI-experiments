@@ -16,14 +16,14 @@
 <script setup lang="ts">
 import { Card, Button } from 'primevue'
 import { paths } from 'src/shared/router/paths'
-import SimpleLayout from 'src/shared/ui/layouts/SimpleLayout.vue'
+import SimpleLayout from 'src/shared/views/layouts/SimpleLayout.vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
 </script>
 
 <style scoped lang="scss">
-@use 'src/shared/ui/styles/index.scss' as *;
+@use 'src/shared/views/styles/index.scss' as *;
 
 .not-found-container {
   display: flex;

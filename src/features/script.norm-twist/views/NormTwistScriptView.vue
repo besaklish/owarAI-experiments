@@ -5,5 +5,5 @@
 </template>
 
 <script setup lang="ts">
-import SimpleLayout from 'src/shared/ui/layouts/SimpleLayout.vue'
+import SimpleLayout from 'src/shared/views/layouts/SimpleLayout.vue'
 </script>

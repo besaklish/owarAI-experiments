@@ -17,7 +17,7 @@
 </template>
 
 <style scoped lang="scss">
-@use 'src/shared/ui/styles/index.scss' as *;
+@use 'src/shared/views/styles/index.scss' as *;
 
 .card-container {
   display: flex;
@@ -47,7 +47,7 @@
 
 <script setup lang="ts">
 import { Card } from 'primevue'
-import SimpleLayout from 'src/shared/ui/layouts/SimpleLayout.vue'
+import SimpleLayout from 'src/shared/views/layouts/SimpleLayout.vue'
 import { paths } from 'src/shared/router/paths'
 import { useRouter } from 'vue-router'
 

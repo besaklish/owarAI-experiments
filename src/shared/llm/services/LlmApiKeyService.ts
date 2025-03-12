@@ -2,7 +2,7 @@ import type { ILlmApiKeyService } from 'src/shared/llm/interfaces/ILlmApiKeyServ
 import { err, ok, type Result } from 'src/shared/result/Result'
 
 export class LlmApiKeyService implements ILlmApiKeyService {
-  private localStorageKey = 'llmApiKey'
+  private localStorageKey = 'owarAI:shared:llmApiKey'
 
   hasApiKey(): boolean {
     return localStorage.getItem(this.localStorageKey) !== null

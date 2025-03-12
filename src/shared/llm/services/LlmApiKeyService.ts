@@ -1,12 +1,10 @@
+import { injectable } from 'inversify'
 import type { ILlmApiKeyService } from 'src/shared/llm/interfaces/ILlmApiKeyService'
 import { err, ok, type Result } from 'src/shared/result/Result'
 
+@injectable()
 export class LlmApiKeyService implements ILlmApiKeyService {
   private localStorageKey = 'owarAI:shared:llmApiKey'
-
-  hasApiKey(): boolean {
-    return localStorage.getItem(this.localStorageKey) !== null
-  }
 
   getApiKey(): Result<string> {
     const apiKey = localStorage.getItem(this.localStorageKey)

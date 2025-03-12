@@ -1,4 +1,4 @@
-import type { ILlmApiKeyService } from 'src/shared/llm/apiKey/interfaces/ILlmApiKeyService'
+import type { ILlmApiKeyService } from 'src/shared/llm/interfaces/ILlmApiKeyService'
 import { err, ok, type Result } from 'src/shared/result/Result'
 
 export class LlmApiKeyService implements ILlmApiKeyService {

@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs'
-import type { IPubSubEvent } from 'shared__event-aggregator'
+import type { IPubSubEvent } from 'src/shared/eventAggregator/interfaces/IPubSubEvent'
 
 export interface IViewModel {
   isBusy$: Observable<boolean>
@@ -12,7 +12,7 @@ export interface IViewModel {
   subscribe<T extends IPubSubEvent<any>>(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     eventClass: new (...args: any[]) => T,
-    callback: (e: T) => Promise<void>
+    callback: (e: T) => Promise<void>,
   ): void
   unsubscribe(): void
 }

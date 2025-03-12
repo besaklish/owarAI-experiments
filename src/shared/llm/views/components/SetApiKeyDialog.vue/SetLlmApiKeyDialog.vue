@@ -16,14 +16,8 @@
         />
         <label for="api-key">API Key</label>
       </IftaLabel>
-      <Message
-        v-for="message in errorMessages"
-        :key="message"
-        severity="error"
-        variant="simple"
-        size="small"
-      >
-        {{ message }}
+      <Message v-if="errorMessage" severity="error" variant="simple" size="small">
+        {{ errorMessage }}
       </Message>
       <Button @click="handleClose">Close</Button>
     </div>
@@ -68,7 +62,7 @@ const emit = defineEmits<{
 const vm = diContainer.get<ILlmApiKeyViewModel>(LlmTypes.ApiKeyViewModel)
 useViewModelLifecycleHooks(vm)
 const apiKey = useObservableProps(vm, 'apiKey$')
-const errorMessages = useObservableProps(vm, 'errorMessages$')
+const errorMessage = useObservableProps(vm, 'errorMessage$')
 
 onMounted(() => {
   if (apiKey.value === '') {

@@ -4,8 +4,7 @@ import type { ObservableProps } from 'src/shared/viewModels/interface/Observable
 
 export interface ILlmApiKeyViewModelProps {
   apiKey: string
-  hasApiKey: boolean
-  errorMessages: string[]
+  errorMessage: string
 }
 
 export interface ILlmApiKeyViewModel extends IViewModel, ObservableProps<ILlmApiKeyViewModelProps> {

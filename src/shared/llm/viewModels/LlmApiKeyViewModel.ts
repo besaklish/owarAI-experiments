@@ -1,5 +1,5 @@
 import { inject, injectable } from 'inversify'
-import { BehaviorSubject, map } from 'rxjs'
+import { BehaviorSubject } from 'rxjs'
 import { EventAggregatorTypes } from 'src/shared/eventAggregator/di/EventAggregatorTypes'
 import type { IEventAggregator } from 'src/shared/eventAggregator/interfaces/IEventAggregator'
 import { LlmTypes } from 'src/shared/llm/di/LlmTypes'
@@ -14,12 +14,8 @@ export class LlmApiKeyViewModel extends ViewModelBase implements IViewModel, ILl
   private _apiKey: BehaviorSubject<string> = new BehaviorSubject<string>('')
   public apiKey$ = this._apiKey.asObservable()
 
-  public hasApiKey$ = this._apiKey.pipe(
-    map((apiKey) => apiKey !== '' && this.validateApiKey(apiKey)),
-  )
-
-  private _errorMessages: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([])
-  public errorMessages$ = this._errorMessages.asObservable()
+  private _errorMessage: BehaviorSubject<string> = new BehaviorSubject<string>('')
+  public errorMessage$ = this._errorMessage.asObservable()
 
   constructor(
     @inject(EventAggregatorTypes.EventAggregator) readonly ea: IEventAggregator,
@@ -34,21 +30,24 @@ export class LlmApiKeyViewModel extends ViewModelBase implements IViewModel, ILl
 
   setApiKey(apiKey: string): void {
     if (!this.validateApiKey(apiKey)) {
-      this._errorMessages.next(['Invalid API key'])
+      this._errorMessage.next('Invalid API key')
     } else {
-      this._errorMessages.next([])
+      this._errorMessage.next('')
     }
 
     this._apiKey.next(apiKey)
   }
 
   saveApiKeyIfValid(): Result<void> {
-    if (this.validateApiKey(this._apiKey.value)) {
-      this.apiKeyService.setApiKey(this._apiKey.value)
-      return ok(undefined)
-    } else {
+    if (!this.validateApiKey(this._apiKey.value)) {
+      this._errorMessage.next('Invalid API key')
       return err(new Error('Invalid API key'))
     }
+
+    this._errorMessage.next('')
+    this.apiKeyService.setApiKey(this._apiKey.value)
+
+    return ok(undefined)
   }
 
   async load(): Promise<void> {

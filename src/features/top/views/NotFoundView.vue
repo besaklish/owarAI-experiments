@@ -1,19 +1,25 @@
-<!-- TODO: Refactor -->
 <template>
-  <Card>
-    <template #title> 404 - Page Not Found </template>
-    <template #content>
-      <div class="not-found-container">
-        <h2>Oops! The page you're looking for doesn't exist.</h2>
-        <p>It seems you've ventured into uncharted territory.</p>
-        <router-link to="/" class="home-link">Return to Home</router-link>
-      </div>
-    </template>
-  </Card>
+  <SimpleLayout>
+    <Card>
+      <template #title> 404 - Page Not Found </template>
+      <template #content>
+        <div class="not-found-container">
+          <h2>Oops! The page you're looking for doesn't exist.</h2>
+          <p>It seems you've ventured into uncharted territory.</p>
+          <Button label="Return to Home" severity="info" @click="router.push(paths.top)" />
+        </div>
+      </template>
+    </Card>
+  </SimpleLayout>
 </template>
 
 <script setup lang="ts">
-import { Card } from 'primevue'
+import { Card, Button } from 'primevue'
+import { paths } from 'src/shared/router/paths'
+import SimpleLayout from 'src/shared/ui/layouts/SimpleLayout.vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 </script>
 
 <style scoped lang="scss">
@@ -34,25 +40,6 @@ import { Card } from 'primevue'
   p {
     margin-bottom: 2rem;
     color: #7f8c8d;
-  }
-
-  .home-link {
-    display: inline-block;
-    padding: 0.75rem 1.5rem;
-    background-color: #3498db;
-    color: white;
-    text-decoration: none;
-    border-radius: 4px;
-    font-weight: bold;
-    transition: background-color 0.3s;
-
-    &:hover {
-      background-color: #2980b9;
-    }
-
-    @include mq(mobile) {
-      padding: 0.5rem 1rem;
-    }
   }
 }
 </style>

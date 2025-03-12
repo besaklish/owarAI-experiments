@@ -1,7 +1,7 @@
 <template>
-  <Card>
-    <template #title> owarAI experiments </template>
-    <template #content>
+  <div class="layout">
+    <h1>owarAI experiments</h1>
+    <main>
       <div class="card-container">
         <Card class="feature-card">
           <template #title> owarAI Script Generator </template>
@@ -12,8 +12,8 @@
           <template #content> Dynamic UI is presented for you. </template>
         </Card>
       </div>
-    </template>
-  </Card>
+    </main>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -22,6 +22,10 @@ import { Card } from 'primevue'
 
 <style scoped lang="scss">
 @import 'src/shared/ui/styles/index.scss';
+
+.layout {
+  padding: 1rem;
+}
 
 .card-container {
   display: flex;

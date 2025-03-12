@@ -40,6 +40,7 @@ import { Card } from 'primevue'
   .feature-card {
     flex: 1;
     min-width: 250px;
+    cursor: pointer;
 
     @include mq(tablet, mobile) {
       min-width: 100%;

@@ -13,19 +13,28 @@
               >
               <InputText
                 id="theme-input"
-                v-model="theme"
-                placeholder="Enter a theme for your script"
+                :model-value="theme"
+                @update:model-value="vm.setTheme($event as string)"
+                placeholder="Starbucks"
                 style="width: 100%"
               />
+
+              <Message
+                v-if="errorMessage"
+                severity="error"
+                style="width: 100%; margin-top: 10px; margin-bottom: 5px"
+              >
+                {{ errorMessage }}
+              </Message>
             </div>
 
             <div>
               <Button
                 label="Generate Script"
                 icon="pi pi-bolt"
-                :loading="isGenerating"
-                :disabled="isGenerating || !theme.trim()"
-                @click="generateScript"
+                :loading="isBusy"
+                :disabled="isBusy"
+                @click="vm.generateScript()"
                 style="width: 100%"
               />
             </div>
@@ -34,7 +43,7 @@
               class="script-output"
               style="background-color: #f8f9fa; border-radius: 6px; padding: 16px"
             >
-              <div v-if="isGenerating" style="display: flex; justify-content: center; width: 100%">
+              <div v-if="isBusy" style="display: flex; justify-content: center; width: 100%">
                 <ProgressSpinner />
               </div>
 
@@ -42,7 +51,7 @@
                 <pre>{{ generatedScript }}</pre>
               </Panel>
 
-              <Message v-else severity="info" style="width: 100%">
+              <Message v-else severity="info" style="width: 100%; margin: 10px 0">
                 Your generated script will appear here
               </Message>
             </div>
@@ -77,7 +86,7 @@ pre {
 
 <script setup lang="ts">
 import SimpleLayout from 'src/shared/views/layouts/SimpleLayout.vue'
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import SetApiKeyDialog from 'src/shared/llm/views/components/SetApiKeyDialog.vue/SetLlmApiKeyDialog.vue'
 import Card from 'primevue/card'
 import InputText from 'primevue/inputtext'
@@ -95,28 +104,14 @@ import { useObservableProps } from 'src/shared/views/composables/useObservablePr
 const showSetApiKeyDialog = ref(true)
 
 // Get the view model from the DI container
-const viewModel = diContainer.get<INormTwistScriptViewModel>(NormTwistScriptTypes.ViewModel)
+const vm = diContainer.get<INormTwistScriptViewModel>(NormTwistScriptTypes.ViewModel)
 
 // Set up view model lifecycle hooks
-useViewModelLifecycleHooks(viewModel)
+useViewModelLifecycleHooks(vm)
 
 // Bind to view model observable properties
-const theme = computed({
-  get: () => themeFromVM.value,
-  set: (value: string) => viewModel.setTheme(value),
-})
-const themeFromVM = useObservableProps(viewModel, 'theme$')
-const isGenerating = useObservableProps(viewModel, 'isGenerating$')
-const generatedScript = useObservableProps(viewModel, 'generatedScript$')
-
-// Generate script using the view model
-const generateScript = async () => {
-  if (!theme.value.trim()) return
-
-  const result = await viewModel.generateScript()
-
-  if (result.isErr) {
-    console.error('Error generating script:', result.error)
-  }
-}
+const theme = useObservableProps(vm, 'theme$')
+const errorMessage = useObservableProps(vm, 'errorMessage$')
+const isBusy = useObservableProps(vm, 'isBusy$')
+const generatedScript = useObservableProps(vm, 'generatedScript$')
 </script>

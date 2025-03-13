@@ -1,4 +1,5 @@
 import { Observable } from 'rxjs'
+import type { IEventAggregator } from 'src/shared/eventAggregator/interfaces/IEventAggregator'
 import type { IPubSubEvent } from 'src/shared/eventAggregator/interfaces/IPubSubEvent'
 
 export interface IViewModel {
@@ -10,6 +11,7 @@ export interface IViewModel {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   subscribe<T extends IPubSubEvent<any>>(
+    ea: IEventAggregator,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     eventClass: new (...args: any[]) => T,
     callback: (e: T) => Promise<void>,

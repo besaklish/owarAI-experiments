@@ -12,7 +12,7 @@ export abstract class ViewModelBase implements IViewModel {
 
   private _subscriptions: ISubscription[] = []
 
-  constructor(protected readonly ea: IEventAggregator) {}
+  constructor() {}
 
   setIsBusy(value: boolean): void {
     this._isBusy.next(value)
@@ -29,12 +29,13 @@ export abstract class ViewModelBase implements IViewModel {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   subscribe<T extends IPubSubEvent<any>>(
+    ea: IEventAggregator,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     eventClass: new (...args: any[]) => T,
     callback: (e: T) => Promise<void>,
   ): void {
     this._subscriptions.push(
-      this.ea.subscribe(
+      ea.subscribe(
         eventClass as new <P>(payload: P) => IPubSubEvent<P>,
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         callback as (e: IPubSubEvent<any>) => Promise<void>,

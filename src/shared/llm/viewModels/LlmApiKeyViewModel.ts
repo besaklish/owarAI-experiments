@@ -1,7 +1,5 @@
 import { inject, injectable } from 'inversify'
 import { BehaviorSubject } from 'rxjs'
-import { EventAggregatorTypes } from 'src/shared/eventAggregator/di/EventAggregatorTypes'
-import type { IEventAggregator } from 'src/shared/eventAggregator/interfaces/IEventAggregator'
 import { LlmTypes } from 'src/shared/llm/di/LlmTypes'
 import type { ILlmApiKeyService } from 'src/shared/llm/interfaces/ILlmApiKeyService'
 import type { ILlmApiKeyViewModel } from 'src/shared/llm/interfaces/ILlmApiKeyViewModel'
@@ -17,11 +15,8 @@ export class LlmApiKeyViewModel extends ViewModelBase implements IViewModel, ILl
   private _errorMessage: BehaviorSubject<string> = new BehaviorSubject<string>('')
   public errorMessage$ = this._errorMessage.asObservable()
 
-  constructor(
-    @inject(EventAggregatorTypes.EventAggregator) readonly ea: IEventAggregator,
-    @inject(LlmTypes.ApiKeyService) private readonly apiKeyService: ILlmApiKeyService,
-  ) {
-    super(ea)
+  constructor(@inject(LlmTypes.ApiKeyService) private readonly apiKeyService: ILlmApiKeyService) {
+    super()
   }
 
   validateApiKey(apiKey: string): boolean {

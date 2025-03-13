@@ -20,23 +20,23 @@ export class LlmApiKeyViewModel extends ViewModelBase implements IViewModel, ILl
   }
 
   validateApiKey(apiKey: string): boolean {
-    return apiKey.startsWith('sk-')
+    return apiKey.startsWith('sk-') && apiKey.length >= 20
   }
 
   setApiKey(apiKey: string): void {
+    this._apiKey.next(apiKey)
+
     if (!this.validateApiKey(apiKey)) {
-      this._errorMessage.next('Invalid API key')
+      this._errorMessage.next('Invalid API key format')
     } else {
       this._errorMessage.next('')
     }
-
-    this._apiKey.next(apiKey)
   }
 
   saveApiKeyIfValid(): Result<void> {
     if (!this.validateApiKey(this._apiKey.value)) {
-      this._errorMessage.next('Invalid API key')
-      return err(new Error('Invalid API key'))
+      this._errorMessage.next('Invalid API key format')
+      return err(new Error('Invalid API key format'))
     }
 
     this._errorMessage.next('')
@@ -46,6 +46,8 @@ export class LlmApiKeyViewModel extends ViewModelBase implements IViewModel, ILl
   }
 
   async load(): Promise<void> {
+    this.setIsBusy(true)
+
     const getApiKeyResult = this.apiKeyService.getApiKey()
 
     if (getApiKeyResult.isErr) {
@@ -53,5 +55,7 @@ export class LlmApiKeyViewModel extends ViewModelBase implements IViewModel, ILl
     }
 
     this._apiKey.next(getApiKeyResult.value)
+
+    this.setIsBusy(false)
   }
 }

@@ -48,7 +48,6 @@ import type { ILlmApiKeyViewModel } from 'src/shared/llm/interfaces/ILlmApiKeyVi
 import { useObservableProps } from 'src/shared/views/composables/useObservableProps'
 import { useViewModelLifecycleHooks } from 'src/shared/views/composables/useViewModelLifecycleHools'
 import Message from 'primevue/message'
-import { onMounted } from 'vue'
 import Button from 'primevue/button'
 
 defineProps<{
@@ -64,19 +63,11 @@ useViewModelLifecycleHooks(vm)
 const apiKey = useObservableProps(vm, 'apiKey$')
 const errorMessage = useObservableProps(vm, 'errorMessage$')
 
-onMounted(() => {
-  if (apiKey.value === '') {
-    emit('update:modelValue', true)
-  }
-})
-
 const handleClose = () => {
   const saveApiKeyResult = vm.saveApiKeyIfValid()
 
-  if (saveApiKeyResult.isErr) {
-    return
+  if (saveApiKeyResult.isOk) {
+    emit('update:modelValue', false)
   }
-
-  emit('update:modelValue', false)
 }
 </script>

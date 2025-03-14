@@ -11,7 +11,9 @@
               id="theme-input"
               label="Theme"
               :modelValue="theme"
-              @update:modelValue="(value) => value !== undefined && vm.setTheme(value)"
+              :disabled="isBusy"
+              @update:modelValue="(value) => vm.setTheme(value as string)"
+              @keypress.enter="vm.generateScript()"
               :errorMessage="errorMessage"
             />
           </div>

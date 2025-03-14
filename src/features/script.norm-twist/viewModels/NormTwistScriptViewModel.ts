@@ -32,6 +32,10 @@ export class NormTwistScriptViewModel
   }
 
   async generateScript(): Promise<Result<string>> {
+    if (this._isBusy.value) {
+      return err(new Error('The ViewModel is busy'))
+    }
+
     this.setIsBusy(true)
 
     if (!this._theme.value.trim()) {

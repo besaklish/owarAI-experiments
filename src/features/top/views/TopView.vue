@@ -31,9 +31,9 @@
 
 .page-title {
   text-align: center;
-  color: #5e35b1;
-  text-shadow: 2px 2px 0 #e0e0ff;
-  margin-bottom: 2rem;
+  color: $oe-secondary-dark;
+  text-shadow: 2px 2px 0 $oe-secondary-light;
+  margin-bottom: $oe-spacing-xl;
   font-size: 2.5rem;
   transform: rotate(-1deg);
 }
@@ -41,23 +41,23 @@
 .card-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem;
+  gap: $oe-spacing-xl;
   justify-content: space-between;
-  padding: 1rem;
+  padding: $oe-spacing-md;
 
   @include mq(tablet, mobile) {
     flex-direction: column;
   }
 
   @include mq(mobile) {
-    gap: 1.5rem;
+    gap: $oe-spacing-lg;
   }
 
   .feature-card {
     flex: 1;
     min-width: 280px;
     cursor: pointer;
-    transition: transform 0.3s;
+    transition: transform $oe-transition-duration;
 
     &:hover {
       transform: translateY(-5px) rotate(0deg) !important;
@@ -71,14 +71,14 @@
 
 .card-title {
   margin: 0;
-  font-size: 1.5rem;
-  color: #5e35b1;
+  font-size: $oe-title-font-size;
+  color: $oe-secondary-dark;
 }
 
 .card-content {
-  font-size: 1.1rem;
+  font-size: $oe-subtitle-font-size;
   line-height: 1.5;
-  margin: 0.5rem 0 1.5rem 0;
+  margin: $oe-spacing-sm 0 $oe-spacing-lg 0;
 }
 </style>
 

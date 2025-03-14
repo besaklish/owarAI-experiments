@@ -21,11 +21,13 @@
 </template>
 
 <style scoped lang="scss">
+@use 'src/shared/views/styles/index.scss' as *;
+
 .dialog-layout {
-  padding: 0.5rem;
+  padding: $oe-spacing-sm;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: $oe-spacing-lg;
 
   > * {
     width: 100%;
@@ -33,22 +35,10 @@
 }
 
 .instruction-text {
-  font-size: 1.1rem;
-  color: #555;
+  font-size: $oe-subtitle-font-size;
+  color: $oe-text-secondary;
   text-align: center;
-  margin-bottom: 0.5rem;
-}
-
-.input-container {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.input-label {
-  font-weight: 600;
-  color: #555;
-  margin-bottom: 0.25rem;
+  margin-bottom: $oe-spacing-sm;
 }
 </style>
 

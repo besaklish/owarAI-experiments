@@ -28,41 +28,32 @@ defineProps<{
 </script>
 
 <style scoped lang="scss">
-.oe-card {
-  border-radius: 30px !important; // Very rounded corners
-  overflow: hidden;
-  transition: all 0.4s;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
-  transform: rotate(-1deg); // Slightly tilted for fun
-  border: none !important;
+@use 'src/shared/views/styles/index.scss' as *;
 
-  &:hover {
-    transform: rotate(1deg) translateY(-5px); // Tilt the other way on hover
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15) !important;
-  }
+.oe-card {
+  @include oe-card-style;
 
   :deep(.p-card-body) {
-    padding: 1.5rem !important;
+    padding: $oe-spacing-lg;
   }
 
   :deep(.p-card-content) {
-    padding: 0 !important;
+    padding: 0;
   }
 }
 
 .oe-card-header {
-  padding: 1.5rem;
-  border-bottom: 3px dotted #e2e8f0; // Dotted border for fun
-  background-color: #f0f7ff;
-  margin: -1.5rem -1.5rem 1.5rem -1.5rem;
+  padding: $oe-spacing-lg;
+  border-bottom: $oe-border-width dotted #e2e8f0;
+  background-color: $oe-background-light;
+  margin: -#{$oe-spacing-lg} -#{$oe-spacing-lg} #{$oe-spacing-lg} -#{$oe-spacing-lg};
 }
 
 .oe-card-title {
   margin: 0;
-  font-size: 1.5rem;
+  font-size: $oe-title-font-size;
   font-weight: 700;
-  color: #5e35b1;
-  text-shadow: 1px 1px 0 #e0e0ff; // Fun text shadow
+  @include oe-title-style;
 }
 
 .oe-card-content {
@@ -70,9 +61,9 @@ defineProps<{
 }
 
 .oe-card-footer {
-  padding: 1.5rem;
-  border-top: 3px dotted #e2e8f0; // Dotted border for fun
-  margin: 1.5rem -1.5rem -1.5rem -1.5rem;
-  background-color: #f0f7ff;
+  padding: $oe-spacing-lg;
+  border-top: $oe-border-width dotted #e2e8f0;
+  margin: $oe-spacing-lg -#{$oe-spacing-lg} -#{$oe-spacing-lg} -#{$oe-spacing-lg};
+  background-color: $oe-background-light;
 }
 </style>

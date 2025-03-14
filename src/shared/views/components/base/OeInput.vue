@@ -37,56 +37,27 @@ defineEmits<{
 </script>
 
 <style scoped lang="scss">
+@use 'src/shared/views/styles/index.scss' as *;
+
 .oe-input-container {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: $oe-spacing-sm;
   width: 100%;
 }
 
 .oe-input-label {
-  font-weight: 600;
-  color: #7b68ee; // Fun purple color
-  font-size: 1rem;
-  transform: rotate(-1deg); // Slight tilt for fun
-  display: inline-block;
-  margin-bottom: 0.25rem;
-  padding-left: 0.5rem;
-
-  // Add a fun underline
-  &::after {
-    content: '';
-    display: block;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, #9c88ff, transparent);
-    border-radius: 2px;
-    margin-top: 2px;
-  }
+  @include oe-input-label-style;
 }
 
 .oe-input {
-  border-radius: 20px !important; // Very rounded
-  padding: 0.7rem 1rem !important;
-  transition: all 0.3s ease;
-  border: 3px dashed #9c88ff !important; // Dashed border for fun
-  background-color: #f8f9fa !important;
-
-  &:focus {
-    transform: scale(1.03) rotate(-1deg) !important; // Slight tilt when focused
-    border-color: #9c88ff !important;
-    box-shadow: 0 0 0 3px rgba(156, 136, 255, 0.3) !important;
-  }
-
-  &:hover:not(:disabled) {
-    background-color: #f0f0ff !important;
-  }
+  @include oe-input-style;
 }
 
 .oe-input-error-message {
-  color: #ff6b6b;
-  font-size: 0.8rem;
-  margin-top: 0.25rem;
+  color: $oe-error-dark;
+  font-size: $oe-small-font-size;
+  margin-top: $oe-spacing-xs;
   font-style: italic;
 }
 </style>

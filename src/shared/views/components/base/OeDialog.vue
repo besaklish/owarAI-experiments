@@ -33,74 +33,57 @@ defineEmits<{
 </script>
 
 <style scoped lang="scss">
+@use 'src/shared/views/styles/index.scss' as *;
+
 .oe-dialog {
-  border-radius: 30px !important; // Very rounded corners
-  overflow: hidden;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3) !important;
+  @include oe-dialog-style;
 
   :deep(.p-dialog-header) {
-    padding: 1.5rem !important;
-    background-color: #ffcdd2 !important; // Fun pink color
-    border-bottom: 4px wavy #ff8a80 !important; // Wavy border for fun
+    padding: $oe-spacing-lg !important;
+    background-color: $oe-error-color !important;
+    border-bottom: 4px wavy $oe-error-dark !important;
 
     .p-dialog-title {
-      font-size: 1.5rem !important;
+      font-size: $oe-title-font-size !important;
       font-weight: 700 !important;
-      color: #c62828 !important;
-      text-shadow: 1px 1px 0 #ffebee !important; // Fun text shadow
+      color: $oe-error-text !important;
+      text-shadow: 1px 1px 0 lighten($oe-error-color, 5%) !important;
     }
 
     .p-dialog-header-icon {
-      background-color: #ffebee !important;
+      background-color: lighten($oe-error-color, 5%) !important;
       border-radius: 50% !important;
       width: 2rem !important;
       height: 2rem !important;
 
       &:hover {
         transform: rotate(90deg) !important;
-        background-color: #ffcdd2 !important;
+        background-color: $oe-error-color !important;
       }
     }
   }
 
   :deep(.p-dialog-content) {
     padding: 0 !important;
-    background-color: #fff8f8 !important; // Light pink background
+    background-color: lighten($oe-error-color, 8%) !important;
   }
 
   // Add a bounce animation when opening
   :deep(.p-dialog-enter-active) {
-    animation: dialog-bounce 0.4s !important;
-  }
-
-  @keyframes dialog-bounce {
-    0% {
-      transform: scale(0.8);
-      opacity: 0;
-    }
-    50% {
-      transform: scale(1.05);
-    }
-    70% {
-      transform: scale(0.95);
-    }
-    100% {
-      transform: scale(1);
-      opacity: 1;
-    }
+    animation: oe-bounce 0.4s !important;
   }
 }
 
 .oe-dialog-content {
-  padding: 1.5rem;
+  padding: $oe-spacing-lg;
 }
 
 .oe-dialog-footer {
-  padding: 1.25rem;
-  border-top: 4px wavy #ff8a80 !important; // Wavy border for fun
-  background-color: #ffcdd2 !important;
+  padding: $oe-spacing-md $oe-spacing-lg;
+  border-top: 4px wavy $oe-error-dark !important;
+  background-color: $oe-error-color !important;
   display: flex;
   justify-content: flex-end;
-  gap: 0.75rem;
+  gap: $oe-spacing-sm;
 }
 </style>

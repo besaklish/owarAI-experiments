@@ -56,41 +56,35 @@
 </template>
 
 <style scoped lang="scss">
+@use 'src/shared/views/styles/index.scss' as *;
+
 .norm-twist-container {
   max-width: 800px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: $oe-spacing-xl;
 }
 
 .page-title {
   text-align: center;
   margin: 0;
   font-size: 1.8rem;
-  color: #5e35b1;
-  text-shadow: 1px 1px 0 #e0e0ff;
+  @include oe-title-style;
 }
 
 .content-container {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: $oe-spacing-lg;
 }
 
 .input-section {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-}
-
-.input-label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 4px;
-  color: #555;
+  gap: $oe-spacing-sm;
 }
 
 .error-message {
-  margin-top: 10px;
+  margin-top: $oe-spacing-sm;
 }
 
 .button-section {
@@ -99,9 +93,9 @@
 }
 
 .script-output {
-  background-color: #f8f9fa;
-  border-radius: 16px;
-  padding: 20px;
+  background-color: $oe-background-light;
+  border-radius: $oe-border-radius-md;
+  padding: $oe-spacing-lg;
   min-height: 300px;
   border: 2px dashed #ccc;
 }
@@ -120,7 +114,7 @@
 }
 
 .info-message {
-  margin: 10px 0;
+  margin: $oe-spacing-sm 0;
 }
 
 pre {

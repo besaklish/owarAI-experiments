@@ -2,7 +2,7 @@
   <div class="oe-components-demo">
     <OeCard title="OwarAI Experiments Fun Components">
       <div class="demo-section">
-        <h3>OeButton</h3>
+        <h3 class="demo-title">OeButton</h3>
         <div class="demo-row">
           <OeButton label="Click Me!" @click="count++" />
           <div class="counter">Count: {{ count }}</div>
@@ -10,7 +10,7 @@
       </div>
 
       <div class="demo-section">
-        <h3>OeInput</h3>
+        <h3 class="demo-title">OeInput</h3>
         <div class="demo-row">
           <OeInput v-model="inputValue" label="Fun Input" placeholder="Type something fun..." />
           <div v-if="inputValue" class="echo">You typed: {{ inputValue }}</div>
@@ -18,7 +18,7 @@
       </div>
 
       <div class="demo-section">
-        <h3>OeMessage</h3>
+        <h3 class="demo-title">OeMessage</h3>
         <div class="demo-column">
           <OeMessage severity="success" title="Woohoo!" text="You did something awesome!" />
           <OeMessage
@@ -32,14 +32,14 @@
       </div>
 
       <div class="demo-section">
-        <h3>OeSpinner</h3>
+        <h3 class="demo-title">OeSpinner</h3>
         <div class="demo-row center">
           <OeSpinner label="Loading..." />
         </div>
       </div>
 
       <div class="demo-section">
-        <h3>OeDialog</h3>
+        <h3 class="demo-title">OeDialog</h3>
         <div class="demo-row">
           <OeButton label="Open Fun Dialog" @click="dialogVisible = true" />
           <OeDialog v-model="dialogVisible" header="Fun Dialog!">
@@ -56,7 +56,7 @@
       </div>
 
       <div class="demo-section">
-        <h3>OeCard</h3>
+        <h3 class="demo-title">OeCard</h3>
         <div class="demo-row">
           <OeCard title="I'm a Fun Card!">
             <p>Cards are great for containing content in a fun way!</p>
@@ -84,29 +84,32 @@ const dialogInput = ref('')
 </script>
 
 <style scoped lang="scss">
+@use 'src/shared/views/styles/index.scss' as *;
+
 .oe-components-demo {
-  padding: 2rem;
+  padding: $oe-spacing-xl;
   max-width: 800px;
   margin: 0 auto;
   font-family: 'Comic Sans MS', cursive, sans-serif; // Fun font!
 }
 
 .demo-section {
-  margin-bottom: 2.5rem;
+  margin-bottom: $oe-spacing-xl;
+}
 
-  h3 {
-    margin-bottom: 1rem;
-    color: #9c27b0;
-    font-weight: 700;
-    text-shadow: 1px 1px 0 #e1bee7;
-    font-size: 1.5rem;
-  }
+.demo-title {
+  margin-bottom: $oe-spacing-md;
+  color: $oe-secondary-dark;
+  font-weight: 700;
+  text-shadow: 1px 1px 0 $oe-secondary-light;
+  font-size: $oe-title-font-size;
+  @include oe-title-style;
 }
 
 .demo-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: $oe-spacing-md;
   align-items: center;
 
   &.center {
@@ -117,32 +120,32 @@ const dialogInput = ref('')
 .demo-column {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: $oe-spacing-md;
 }
 
 .counter {
-  background-color: #e3f2fd;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
+  background-color: $oe-info-color;
+  padding: $oe-spacing-sm $oe-spacing-md;
+  border-radius: $oe-border-radius-md;
   font-weight: bold;
-  color: #1565c0;
-  border: 2px dashed #90caf9;
+  color: $oe-info-text;
+  border: 2px dashed $oe-info-dark;
 }
 
 .echo {
-  background-color: #f3e5f5;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
+  background-color: lighten($oe-secondary-color, 20%);
+  padding: $oe-spacing-sm $oe-spacing-md;
+  border-radius: $oe-border-radius-md;
   font-weight: bold;
-  color: #6a1b9a;
-  border: 2px dashed #ce93d8;
+  color: darken($oe-secondary-dark, 10%);
+  border: 2px dashed $oe-secondary-color;
 }
 
 .dialog-content {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  padding: 1rem 0;
+  gap: $oe-spacing-md;
+  padding: $oe-spacing-md 0;
 
   p {
     margin: 0;

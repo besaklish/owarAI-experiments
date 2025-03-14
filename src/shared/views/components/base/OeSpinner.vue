@@ -20,28 +20,30 @@ defineProps<{
 </script>
 
 <style scoped lang="scss">
+@use 'src/shared/views/styles/index.scss' as *;
+
 .oe-spinner-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
+  padding: $oe-spacing-md;
 }
 
 .oe-spinner {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: $oe-spacing-md;
 }
 
 .oe-spinner-face {
   width: 60px;
   height: 60px;
-  background-color: #ffeb3b;
+  background-color: $oe-warning-color;
   border-radius: 50%;
   position: relative;
   animation: bounce 1s infinite alternate;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: $oe-shadow-sm;
 }
 
 .oe-spinner-eyes {
@@ -55,9 +57,9 @@ defineProps<{
 .oe-spinner-eye {
   width: 10px;
   height: 10px;
-  background-color: #333;
+  background-color: $oe-text-primary;
   border-radius: 50%;
-  animation: blink 2.5s infinite;
+  animation: oe-blink 2.5s infinite;
 }
 
 .oe-spinner-mouth {
@@ -67,16 +69,16 @@ defineProps<{
   transform: translateX(-50%);
   width: 20px;
   height: 10px;
-  background-color: #333;
+  background-color: $oe-text-primary;
   border-radius: 0 0 10px 10px;
   animation: mouth 1.5s infinite;
 }
 
 .oe-spinner-label {
   font-weight: 600;
-  color: #666;
-  font-size: 1rem;
-  animation: pulse 1.5s infinite;
+  color: $oe-text-secondary;
+  font-size: $oe-body-font-size;
+  animation: oe-pulse 1.5s infinite;
 }
 
 @keyframes bounce {
@@ -91,18 +93,6 @@ defineProps<{
   }
 }
 
-@keyframes blink {
-  0%,
-  45%,
-  55%,
-  100% {
-    transform: scaleY(1);
-  }
-  50% {
-    transform: scaleY(0.1);
-  }
-}
-
 @keyframes mouth {
   0%,
   100% {
@@ -114,16 +104,6 @@ defineProps<{
     width: 15px;
     height: 15px;
     border-radius: 50%;
-  }
-}
-
-@keyframes pulse {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
   }
 }
 </style>

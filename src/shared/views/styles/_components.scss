@@ -1,0 +1,214 @@
+// Colors
+$oe-primary-color: #ff6b6b;
+$oe-primary-dark: #ff5252;
+$oe-primary-light: #ff9e7d;
+
+$oe-secondary-color: #9c88ff;
+$oe-secondary-dark: #7b68ee;
+$oe-secondary-light: #e0e0ff;
+
+$oe-success-color: #a5ffbe;
+$oe-success-dark: #00c853;
+$oe-success-text: #00701a;
+
+$oe-info-color: #a7d8ff;
+$oe-info-dark: #0091ea;
+$oe-info-text: #01579b;
+
+$oe-warning-color: #fff8bc;
+$oe-warning-dark: #ffd600;
+$oe-warning-text: #c67100;
+
+$oe-error-color: #ffcdd2;
+$oe-error-dark: #ff1744;
+$oe-error-text: #b71c1c;
+
+$oe-text-primary: #333333;
+$oe-text-secondary: #555555;
+$oe-text-muted: #7f8c8d;
+
+$oe-background-light: #f8f9fa;
+$oe-background-hover: #f0f0ff;
+
+// Typography
+$oe-font-family: 'Arial', sans-serif;
+$oe-title-font-size: 1.5rem;
+$oe-subtitle-font-size: 1.2rem;
+$oe-body-font-size: 1rem;
+$oe-small-font-size: 0.85rem;
+
+// Spacing
+$oe-spacing-xs: 0.25rem;
+$oe-spacing-sm: 0.5rem;
+$oe-spacing-md: 1rem;
+$oe-spacing-lg: 1.5rem;
+$oe-spacing-xl: 2rem;
+
+// Borders
+$oe-border-radius-sm: 10px;
+$oe-border-radius-md: 20px;
+$oe-border-radius-lg: 30px;
+$oe-border-width: 3px;
+
+// Shadows
+$oe-shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.1);
+$oe-shadow-md: 0 5px 15px rgba(0, 0, 0, 0.1);
+$oe-shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+
+// Transitions
+$oe-transition-duration: 0.3s;
+$oe-transition-timing: ease;
+
+// Animations
+@keyframes oe-wiggle {
+  0%,
+  100% {
+    transform: translateY(-6px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-6px) rotate(-5deg);
+  }
+  75% {
+    transform: translateY(-6px) rotate(5deg);
+  }
+}
+
+@keyframes oe-bounce {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes oe-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes oe-blink {
+  0%,
+  45%,
+  55%,
+  100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(0.1);
+  }
+}
+
+// Mixins
+@mixin oe-card-style {
+  border-radius: $oe-border-radius-lg;
+  overflow: hidden;
+  transition: all $oe-transition-duration $oe-transition-timing;
+  box-shadow: $oe-shadow-md;
+  transform: rotate(-1deg);
+  border: none;
+
+  &:hover {
+    transform: rotate(1deg) translateY(-5px);
+    box-shadow: $oe-shadow-lg;
+  }
+}
+
+@mixin oe-button-style {
+  border-radius: $oe-border-radius-md;
+  transition: all $oe-transition-duration;
+  font-weight: 600;
+  background-color: $oe-primary-color;
+  border-color: $oe-primary-color;
+  padding: 0.6rem 1.2rem;
+  font-size: $oe-body-font-size;
+
+  &:not(:disabled):hover {
+    animation: oe-wiggle 0.5s ease-in-out;
+    box-shadow: 0 6px 0 $oe-primary-light;
+    transform: translateY(-6px);
+  }
+
+  &:not(:disabled):active {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 0 $oe-primary-light;
+  }
+}
+
+@mixin oe-input-style {
+  border-radius: $oe-border-radius-md;
+  padding: 0.7rem 1rem;
+  transition: all $oe-transition-duration $oe-transition-timing;
+  border: $oe-border-width dashed $oe-secondary-color;
+  background-color: $oe-background-light;
+
+  &:focus {
+    transform: scale(1.03) rotate(-1deg);
+    border-color: $oe-secondary-color;
+    box-shadow: 0 0 0 3px rgba($oe-secondary-color, 0.3);
+  }
+
+  &:hover:not(:disabled) {
+    background-color: $oe-background-hover;
+  }
+}
+
+@mixin oe-input-label-style {
+  font-weight: 600;
+  color: $oe-secondary-dark;
+  font-size: $oe-body-font-size;
+  transform: rotate(-1deg);
+  display: inline-block;
+  margin-bottom: $oe-spacing-xs;
+  padding-left: $oe-spacing-sm;
+
+  &::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, $oe-secondary-color, transparent);
+    border-radius: 2px;
+    margin-top: 2px;
+  }
+}
+
+@mixin oe-dialog-style {
+  border-radius: $oe-border-radius-lg;
+  overflow: hidden;
+  box-shadow: $oe-shadow-lg;
+}
+
+@mixin oe-message-style($bg-color, $border-color, $text-color) {
+  border-radius: $oe-border-radius-md;
+  overflow: hidden;
+  box-shadow: $oe-shadow-sm;
+  transform: rotate(-1deg);
+  margin: $oe-spacing-md 0;
+  background-color: $bg-color;
+  border: $oe-border-width dashed $border-color;
+  color: $text-color;
+
+  &:hover {
+    transform: rotate(1deg);
+  }
+}
+
+@mixin oe-title-style {
+  color: $oe-secondary-dark;
+  text-shadow: 1px 1px 0 $oe-secondary-light;
+  transform: rotate(-1deg);
+}

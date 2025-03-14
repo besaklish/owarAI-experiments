@@ -29,8 +29,8 @@ const router = useRouter()
 .not-found-title {
   margin: 0;
   font-size: 2rem;
-  color: #ff6b6b;
-  text-shadow: 1px 1px 0 #ffebee;
+  color: $oe-error-dark;
+  text-shadow: 1px 1px 0 $oe-error-color;
   text-align: center;
 }
 
@@ -39,20 +39,20 @@ const router = useRouter()
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 1.5rem 1rem 2rem;
+  padding: $oe-spacing-lg $oe-spacing-md $oe-spacing-xl;
 }
 
 .not-found-subtitle {
-  margin-bottom: 1rem;
-  color: #ff6b6b;
-  font-size: 1.5rem;
+  margin-bottom: $oe-spacing-md;
+  color: $oe-error-dark;
+  font-size: $oe-title-font-size;
   transform: rotate(-1deg);
 }
 
 .not-found-message {
-  margin-bottom: 2rem;
-  color: #7f8c8d;
-  font-size: 1.2rem;
+  margin-bottom: $oe-spacing-xl;
+  color: $oe-text-muted;
+  font-size: $oe-subtitle-font-size;
   max-width: 80%;
   line-height: 1.5;
 }

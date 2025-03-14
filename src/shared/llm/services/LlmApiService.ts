@@ -90,7 +90,7 @@ export class LlmApiService implements ILlmApiService {
       }
       const apiKey = apiKeyResult.value
 
-      const client = new OpenAI({ apiKey })
+      const client = new OpenAI({ apiKey, dangerouslyAllowBrowser: true })
 
       // Create a text format using zodTextFormat
       const format = zodTextFormat(request.text.format.schema as T, request.text.format.name)

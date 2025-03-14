@@ -1,16 +1,16 @@
 <template>
-  <div class="oe-input-container">
-    <label v-if="label" :for="id" class="oe-input-label">{{ label }}</label>
+  <div class="oe-input" :class="{ 'oe-input--error': !!errorMessage }">
+    <label v-if="label" :for="id" class="oe-input__label">{{ label }}</label>
     <InputText
       :id="id"
       :model-value="modelValue"
       @update:model-value="$emit('update:modelValue', $event)"
       :placeholder="placeholder"
       :disabled="disabled"
-      class="oe-input"
+      class="oe-input__field"
       v-bind="$attrs"
     />
-    <small v-if="errorMessage" class="oe-input-error-message">{{ errorMessage }}</small>
+    <small v-if="errorMessage" class="oe-input__error">{{ errorMessage }}</small>
     <slot></slot>
   </div>
 </template>
@@ -39,25 +39,33 @@ defineEmits<{
 <style scoped lang="scss">
 @use 'src/shared/views/styles/index.scss' as *;
 
-.oe-input-container {
-  display: flex;
-  flex-direction: column;
-  gap: $oe-spacing-sm;
-  width: 100%;
-}
-
-.oe-input-label {
-  @include oe-input-label-style;
-}
-
 .oe-input {
-  @include oe-input-style;
-}
+  @include oe-flex-column($oe-spacing-sm);
+  width: 100%;
 
-.oe-input-error-message {
-  color: $oe-error-dark;
-  font-size: $oe-small-font-size;
-  margin-top: $oe-spacing-xs;
-  font-style: italic;
+  &--error {
+    .oe-input__field {
+      border-color: $oe-error-dark;
+
+      &:focus {
+        box-shadow: 0 0 0 3px rgba($oe-error-dark, 0.3);
+      }
+    }
+  }
+
+  &__label {
+    @include oe-input-label-style;
+  }
+
+  &__field {
+    @include oe-input-style;
+  }
+
+  &__error {
+    color: $oe-error-dark;
+    font-size: $oe-small-font-size;
+    margin-top: $oe-spacing-xs;
+    font-style: italic;
+  }
 }
 </style>

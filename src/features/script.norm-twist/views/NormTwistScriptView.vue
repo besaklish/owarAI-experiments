@@ -1,43 +1,38 @@
 <template>
   <SimpleLayout>
-    <div class="norm-twist-container">
+    <div class="oe-norm-twist">
       <OeCard>
         <template #header>
-          <h1 class="page-title">Norm Twist Script Generator</h1>
+          <h1 class="oe-norm-twist__title">Norm Twist Script Generator</h1>
         </template>
-        <div class="content-container">
-          <div class="input-section">
+        <div class="oe-norm-twist__content">
+          <div class="oe-norm-twist__input">
             <OeInput
               id="theme-input"
               label="Theme"
               :modelValue="theme"
               @update:modelValue="(value) => value !== undefined && vm.setTheme(value)"
               placeholder="Starbucks"
-            />
-
-            <OeMessage
-              v-if="errorMessage"
-              severity="error"
-              :text="errorMessage"
-              class="error-message"
+              :errorMessage="errorMessage"
             />
           </div>
 
-          <div class="button-section">
+          <div class="oe-norm-twist__actions">
             <OeButton
               label="Generate Script"
               :loading="isBusy"
               :disabled="isBusy"
               @click="vm.generateScript()"
+              variant="primary"
             />
           </div>
 
-          <div class="script-output">
-            <div v-if="isBusy" class="spinner-container">
+          <div class="oe-norm-twist__output">
+            <div v-if="isBusy" class="oe-norm-twist__spinner">
               <OeSpinner label="Generating script..." />
             </div>
 
-            <OeCard v-else-if="generatedScript" class="script-content">
+            <OeCard v-else-if="generatedScript" class="oe-norm-twist__script">
               <pre>{{ generatedScript }}</pre>
             </OeCard>
 
@@ -45,7 +40,7 @@
               v-else
               severity="info"
               text="Your generated script will appear here"
-              class="info-message"
+              class="oe-norm-twist__info"
             />
           </div>
         </div>
@@ -58,49 +53,37 @@
 <style scoped lang="scss">
 @use 'src/shared/views/styles/index.scss' as *;
 
-.norm-twist-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: $oe-spacing-xl;
+.oe-norm-twist {
+  @include oe-container;
 }
 
-.page-title {
-  text-align: center;
+.oe-norm-twist__title {
+  @include oe-title-style(1.8rem);
   margin: 0;
-  font-size: 1.8rem;
-  @include oe-title-style;
 }
 
-.content-container {
-  display: flex;
-  flex-direction: column;
-  gap: $oe-spacing-lg;
+.oe-norm-twist__content {
+  @include oe-flex-column($oe-spacing-lg);
 }
 
-.input-section {
-  display: flex;
-  flex-direction: column;
-  gap: $oe-spacing-sm;
+.oe-norm-twist__input {
+  @include oe-flex-column($oe-spacing-sm);
 }
 
-.error-message {
-  margin-top: $oe-spacing-sm;
-}
-
-.button-section {
+.oe-norm-twist__actions {
   display: flex;
   justify-content: center;
 }
 
-.script-output {
+.oe-norm-twist__output {
   background-color: $oe-background-light;
   border-radius: $oe-border-radius-md;
   padding: $oe-spacing-lg;
   min-height: 300px;
-  border: 2px dashed #ccc;
+  @include oe-playful-border($oe-border-light, $oe-border-style-dashed);
 }
 
-.spinner-container {
+.oe-norm-twist__spinner {
   display: flex;
   justify-content: center;
   width: 100%;
@@ -108,12 +91,12 @@
   align-items: center;
 }
 
-.script-content {
+.oe-norm-twist__script {
   width: 100%;
   font-family: monospace;
 }
 
-.info-message {
+.oe-norm-twist__info {
   margin: $oe-spacing-sm 0;
 }
 

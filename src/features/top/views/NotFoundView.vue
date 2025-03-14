@@ -1,15 +1,17 @@
 <template>
   <SimpleLayout>
-    <OeCard>
-      <template #header>
-        <h1 class="not-found-title">404 - Page Not Found</h1>
-      </template>
-      <div class="not-found-container">
-        <h2 class="not-found-subtitle">Oops! The page you're looking for doesn't exist.</h2>
-        <p class="not-found-message">It seems you've ventured into uncharted territory.</p>
-        <OeButton label="Return to Home" @click="router.push(paths.top)" />
-      </div>
-    </OeCard>
+    <div class="oe-not-found">
+      <OeCard>
+        <template #header>
+          <h1 class="oe-not-found__title">404 - Page Not Found</h1>
+        </template>
+        <div class="oe-not-found__content">
+          <h2 class="oe-not-found__subtitle">Oops! The page you're looking for doesn't exist.</h2>
+          <p class="oe-not-found__message">It seems you've ventured into uncharted territory.</p>
+          <OeButton label="Return to Home" @click="router.push(paths.top)" variant="primary" />
+        </div>
+      </OeCard>
+    </div>
   </SimpleLayout>
 </template>
 
@@ -26,34 +28,31 @@ const router = useRouter()
 <style scoped lang="scss">
 @use 'src/shared/views/styles/index.scss' as *;
 
-.not-found-title {
-  margin: 0;
-  font-size: 2rem;
-  color: $oe-error-dark;
-  text-shadow: 1px 1px 0 $oe-error-color;
-  text-align: center;
-}
+.oe-not-found {
+  @include oe-container;
 
-.not-found-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: $oe-spacing-lg $oe-spacing-md $oe-spacing-xl;
-}
+  &__title {
+    margin: 0;
+    @include oe-title-style(2rem, $oe-error-dark);
+    text-shadow: 1px 1px 0 $oe-error-color;
+  }
 
-.not-found-subtitle {
-  margin-bottom: $oe-spacing-md;
-  color: $oe-error-dark;
-  font-size: $oe-title-font-size;
-  transform: rotate(-1deg);
-}
+  &__content {
+    @include oe-flex-column;
+    align-items: center;
+    text-align: center;
+    padding: $oe-spacing-lg $oe-spacing-md $oe-spacing-xl;
+  }
 
-.not-found-message {
-  margin-bottom: $oe-spacing-xl;
-  color: $oe-text-muted;
-  font-size: $oe-subtitle-font-size;
-  max-width: 80%;
-  line-height: 1.5;
+  &__subtitle {
+    @include oe-subtitle-style($oe-title-font-size, $oe-error-dark);
+    margin-bottom: $oe-spacing-md;
+  }
+
+  &__message {
+    @include oe-text-style($oe-subtitle-font-size, $oe-text-muted);
+    margin-bottom: $oe-spacing-xl;
+    max-width: 80%;
+  }
 }
 </style>

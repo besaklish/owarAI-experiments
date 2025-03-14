@@ -3,9 +3,12 @@
     header="Set API Key"
     :modelValue="modelValue"
     @update:modelValue="emit('update:modelValue', $event)"
+    variant="info"
   >
-    <div class="dialog-layout">
-      <div class="instruction-text">You need OpenAI's API key to use this application.</div>
+    <div class="oe-api-key-dialog">
+      <div class="oe-api-key-dialog__instruction">
+        You need OpenAI's API key to use this application.
+      </div>
       <OeInput
         id="api-key"
         label="API Key"
@@ -13,9 +16,11 @@
         @update:modelValue="(value) => value !== undefined && vm.setApiKey(value)"
         placeholder="sk-"
         type="password"
+        :errorMessage="errorMessage"
       />
-      <OeMessage v-if="errorMessage" severity="error" :text="errorMessage" />
-      <OeButton label="Close" @click="handleClose" />
+      <div class="oe-api-key-dialog__actions">
+        <OeButton label="Close" @click="handleClose" variant="primary" />
+      </div>
     </div>
   </OeDialog>
 </template>
@@ -23,22 +28,25 @@
 <style scoped lang="scss">
 @use 'src/shared/views/styles/index.scss' as *;
 
-.dialog-layout {
+.oe-api-key-dialog {
+  @include oe-flex-column($oe-spacing-lg);
   padding: $oe-spacing-sm;
-  display: flex;
-  flex-direction: column;
-  gap: $oe-spacing-lg;
 
   > * {
     width: 100%;
   }
-}
 
-.instruction-text {
-  font-size: $oe-subtitle-font-size;
-  color: $oe-text-secondary;
-  text-align: center;
-  margin-bottom: $oe-spacing-sm;
+  &__instruction {
+    @include oe-text-style($oe-subtitle-font-size, $oe-text-secondary);
+    text-align: center;
+    margin-bottom: $oe-spacing-sm;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: center;
+    margin-top: $oe-spacing-md;
+  }
 }
 </style>
 
@@ -51,7 +59,6 @@ import { useViewModelLifecycleHooks } from 'src/shared/views/composables/useView
 import OeDialog from 'src/shared/views/components/base/OeDialog.vue'
 import OeButton from 'src/shared/views/components/base/OeButton.vue'
 import OeInput from 'src/shared/views/components/base/OeInput.vue'
-import OeMessage from 'src/shared/views/components/base/OeMessage.vue'
 
 defineProps<{
   modelValue: boolean

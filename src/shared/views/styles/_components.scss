@@ -1,12 +1,20 @@
+// ==========================================================================
+// DESIGN TOKENS
+// ==========================================================================
+
 // Colors
+// --------------------------------------------------------------------------
+// Primary palette
 $oe-primary-color: #ff6b6b;
 $oe-primary-dark: #ff5252;
 $oe-primary-light: #ff9e7d;
 
+// Secondary palette
 $oe-secondary-color: #9c88ff;
 $oe-secondary-dark: #7b68ee;
 $oe-secondary-light: #e0e0ff;
 
+// Semantic colors
 $oe-success-color: #a5ffbe;
 $oe-success-dark: #00c853;
 $oe-success-text: #00701a;
@@ -23,21 +31,41 @@ $oe-error-color: #ffcdd2;
 $oe-error-dark: #ff1744;
 $oe-error-text: #b71c1c;
 
+// Text colors
 $oe-text-primary: #333333;
 $oe-text-secondary: #555555;
 $oe-text-muted: #7f8c8d;
 
+// Background colors
 $oe-background-light: #f8f9fa;
 $oe-background-hover: #f0f0ff;
 
+// Border colors - NEW
+$oe-border-light: #e2e8f0;
+$oe-border-primary: $oe-primary-color;
+$oe-border-secondary: $oe-secondary-color;
+
 // Typography
+// --------------------------------------------------------------------------
 $oe-font-family: 'Arial', sans-serif;
 $oe-title-font-size: 1.5rem;
 $oe-subtitle-font-size: 1.2rem;
 $oe-body-font-size: 1rem;
 $oe-small-font-size: 0.85rem;
 
+// Font weights - NEW
+$oe-font-weight-normal: 400;
+$oe-font-weight-medium: 500;
+$oe-font-weight-bold: 600;
+$oe-font-weight-extra-bold: 700;
+
+// Line heights - NEW
+$oe-line-height-tight: 1.2;
+$oe-line-height-normal: 1.5;
+$oe-line-height-loose: 1.8;
+
 // Spacing
+// --------------------------------------------------------------------------
 $oe-spacing-xs: 0.25rem;
 $oe-spacing-sm: 0.5rem;
 $oe-spacing-md: 1rem;
@@ -45,21 +73,40 @@ $oe-spacing-lg: 1.5rem;
 $oe-spacing-xl: 2rem;
 
 // Borders
+// --------------------------------------------------------------------------
 $oe-border-radius-sm: 10px;
 $oe-border-radius-md: 20px;
 $oe-border-radius-lg: 30px;
 $oe-border-width: 3px;
 
+// Border styles - NEW
+$oe-border-style-solid: solid;
+$oe-border-style-dashed: dashed;
+$oe-border-style-dotted: dotted;
+$oe-border-style-wavy: wavy;
+
 // Shadows
+// --------------------------------------------------------------------------
 $oe-shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.1);
 $oe-shadow-md: 0 5px 15px rgba(0, 0, 0, 0.1);
 $oe-shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
 
 // Transitions
+// --------------------------------------------------------------------------
 $oe-transition-duration: 0.3s;
 $oe-transition-timing: ease;
 
-// Animations
+// Playful elements - NEW
+// --------------------------------------------------------------------------
+$oe-rotation-sm: -1deg;
+$oe-rotation-md: -2deg;
+$oe-rotation-lg: -3deg;
+$oe-hover-lift: -5px;
+
+// ==========================================================================
+// ANIMATIONS
+// ==========================================================================
+
 @keyframes oe-wiggle {
   0%,
   100% {
@@ -112,17 +159,43 @@ $oe-transition-timing: ease;
   }
 }
 
-// Mixins
-@mixin oe-card-style {
+// ==========================================================================
+// MIXINS
+// ==========================================================================
+
+// Layout Mixins - NEW
+// --------------------------------------------------------------------------
+@mixin oe-container($max-width: 800px, $padding: $oe-spacing-xl) {
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: $padding;
+}
+
+@mixin oe-flex-column($gap: $oe-spacing-md) {
+  display: flex;
+  flex-direction: column;
+  gap: $gap;
+}
+
+@mixin oe-flex-row($gap: $oe-spacing-md, $align: center) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  align-items: $align;
+}
+
+// Component Mixins - ENHANCED
+// --------------------------------------------------------------------------
+@mixin oe-card-style($rotation: $oe-rotation-sm) {
   border-radius: $oe-border-radius-lg;
   overflow: hidden;
   transition: all $oe-transition-duration $oe-transition-timing;
   box-shadow: $oe-shadow-md;
-  transform: rotate(-1deg);
+  transform: rotate($rotation);
   border: none;
 
   &:hover {
-    transform: rotate(1deg) translateY(-5px);
+    transform: rotate(-$rotation) translateY($oe-hover-lift);
     box-shadow: $oe-shadow-lg;
   }
 }
@@ -130,7 +203,7 @@ $oe-transition-timing: ease;
 @mixin oe-button-style {
   border-radius: $oe-border-radius-md;
   transition: all $oe-transition-duration;
-  font-weight: 600;
+  font-weight: $oe-font-weight-bold;
   background-color: $oe-primary-color;
   border-color: $oe-primary-color;
   padding: 0.6rem 1.2rem;
@@ -152,11 +225,11 @@ $oe-transition-timing: ease;
   border-radius: $oe-border-radius-md;
   padding: 0.7rem 1rem;
   transition: all $oe-transition-duration $oe-transition-timing;
-  border: $oe-border-width dashed $oe-secondary-color;
+  border: $oe-border-width $oe-border-style-dashed $oe-border-secondary;
   background-color: $oe-background-light;
 
   &:focus {
-    transform: scale(1.03) rotate(-1deg);
+    transform: scale(1.03) rotate($oe-rotation-sm);
     border-color: $oe-secondary-color;
     box-shadow: 0 0 0 3px rgba($oe-secondary-color, 0.3);
   }
@@ -167,10 +240,10 @@ $oe-transition-timing: ease;
 }
 
 @mixin oe-input-label-style {
-  font-weight: 600;
+  font-weight: $oe-font-weight-bold;
   color: $oe-secondary-dark;
   font-size: $oe-body-font-size;
-  transform: rotate(-1deg);
+  transform: rotate($oe-rotation-sm);
   display: inline-block;
   margin-bottom: $oe-spacing-xs;
   padding-left: $oe-spacing-sm;
@@ -190,25 +263,73 @@ $oe-transition-timing: ease;
   border-radius: $oe-border-radius-lg;
   overflow: hidden;
   box-shadow: $oe-shadow-lg;
+  animation: oe-bounce 0.5s ease-out;
 }
 
 @mixin oe-message-style($bg-color, $border-color, $text-color) {
   border-radius: $oe-border-radius-md;
   overflow: hidden;
   box-shadow: $oe-shadow-sm;
-  transform: rotate(-1deg);
+  transform: rotate($oe-rotation-sm);
   margin: $oe-spacing-md 0;
   background-color: $bg-color;
-  border: $oe-border-width dashed $border-color;
+  border: $oe-border-width $oe-border-style-dashed $border-color;
   color: $text-color;
 
   &:hover {
-    transform: rotate(1deg);
+    transform: rotate(-$oe-rotation-sm);
   }
 }
 
-@mixin oe-title-style {
-  color: $oe-secondary-dark;
+// Typography Mixins - ENHANCED
+// --------------------------------------------------------------------------
+@mixin oe-title-style($size: $oe-title-font-size, $color: $oe-secondary-dark) {
+  font-size: $size;
+  font-weight: $oe-font-weight-bold;
+  color: $color;
   text-shadow: 1px 1px 0 $oe-secondary-light;
-  transform: rotate(-1deg);
+  transform: rotate($oe-rotation-sm);
+  margin-bottom: $oe-spacing-md;
+  text-align: center;
+  line-height: $oe-line-height-tight;
+}
+
+@mixin oe-subtitle-style($size: $oe-subtitle-font-size, $color: $oe-text-secondary) {
+  font-size: $size;
+  font-weight: $oe-font-weight-medium;
+  color: $color;
+  transform: rotate($oe-rotation-sm);
+  margin-bottom: $oe-spacing-sm;
+  line-height: $oe-line-height-normal;
+}
+
+@mixin oe-text-style($size: $oe-body-font-size, $color: $oe-text-primary) {
+  font-size: $size;
+  color: $color;
+  line-height: $oe-line-height-normal;
+}
+
+// Playful Element Mixins - NEW
+// --------------------------------------------------------------------------
+@mixin oe-playful-container {
+  transform: rotate($oe-rotation-sm);
+  transition: all $oe-transition-duration $oe-transition-timing;
+
+  &:hover {
+    transform: rotate(-$oe-rotation-sm);
+  }
+}
+
+@mixin oe-playful-border($color: $oe-border-secondary, $style: $oe-border-style-dashed) {
+  border: $oe-border-width $style $color;
+  border-radius: $oe-border-radius-md;
+}
+
+@mixin oe-playful-shadow {
+  box-shadow: $oe-shadow-md;
+  transition: box-shadow $oe-transition-duration $oe-transition-timing;
+
+  &:hover {
+    box-shadow: $oe-shadow-lg;
+  }
 }

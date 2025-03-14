@@ -26,10 +26,8 @@ export class LlmApiService implements ILlmApiService {
 
       const client = new OpenAI({ apiKey, dangerouslyAllowBrowser: true })
 
-      // Create a text format using zodTextFormat
       const format = zodTextFormat(request.text.format.schema as T, request.text.format.name)
 
-      // Call the OpenAI API
       const response = await client.responses.parse({
         model: request.model,
         input: request.input,
@@ -40,7 +38,6 @@ export class LlmApiService implements ILlmApiService {
         user: request.user,
       })
 
-      // Return the parsed output
       return ok(response.output_parsed as z.infer<T>)
     } catch (error) {
       return err(error instanceof Error ? error : new Error(String(error)))

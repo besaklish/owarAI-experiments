@@ -87,41 +87,6 @@ export class NormTwistScriptViewModel
 7. スクリプト上、常識を壊してしまうのを納得させるような状況をボケが開示する
 8. スクリプト上、ツッコミは納得させられつつツッコミを入れる
 
-<Format>
-## テーマ
-
-<Theme/>
-
-## 常識
-
-<ListOfCommonSense />
-
-## 最も面白くなりそうな常識
-
-<MostInterestingAmongListOfCommonSense />
-
-## 常識を壊す方法
-
-<ListOfHowToBreakCommonSense />
-
-## 最も面白くなりそうな常識破りの方法
-
-<MostInterestingAmongListOfHowToBreakCommonSense />
-
-## 常識破りを納得させるような状況
-
-<ListOfCircumstancesToLetBreakingOfCommonSenseNormal />
-
-## 最も面白くなりそうな常識破りを納得させるような状況
-
-<MostInterestingAmongListOfCircumstancesToLetBreakingOfCommonSenseNormal />
-
-## スクリプト
-
-<YourScript />
-
-</Format>
-
 <Theme>
 ${theme}
 </Theme>

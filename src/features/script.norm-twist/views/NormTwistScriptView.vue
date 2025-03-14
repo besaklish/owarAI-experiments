@@ -12,7 +12,6 @@
               label="Theme"
               :modelValue="theme"
               @update:modelValue="(value) => value !== undefined && vm.setTheme(value)"
-              placeholder="Starbucks"
               :errorMessage="errorMessage"
             />
           </div>

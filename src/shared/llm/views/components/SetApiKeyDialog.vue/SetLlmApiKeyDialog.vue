@@ -6,16 +6,14 @@
   >
     <div class="dialog-layout">
       <div class="instruction-text">You need OpenAI's API key to use this application.</div>
-      <div class="input-container">
-        <label for="api-key" class="input-label">API Key</label>
-        <OeInput
-          id="api-key"
-          :modelValue="apiKey"
-          @update:modelValue="(value) => value !== undefined && vm.setApiKey(value)"
-          placeholder="sk-"
-          type="password"
-        />
-      </div>
+      <OeInput
+        id="api-key"
+        label="API Key"
+        :modelValue="apiKey"
+        @update:modelValue="(value) => value !== undefined && vm.setApiKey(value)"
+        placeholder="sk-"
+        type="password"
+      />
       <OeMessage v-if="errorMessage" severity="error" :text="errorMessage" />
       <OeButton label="Close" @click="handleClose" />
     </div>

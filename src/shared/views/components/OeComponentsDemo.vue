@@ -12,7 +12,7 @@
       <div class="demo-section">
         <h3>OeInput</h3>
         <div class="demo-row">
-          <OeInput v-model="inputValue" placeholder="Type something fun..." />
+          <OeInput v-model="inputValue" label="Fun Input" placeholder="Type something fun..." />
           <div v-if="inputValue" class="echo">You typed: {{ inputValue }}</div>
         </div>
       </div>

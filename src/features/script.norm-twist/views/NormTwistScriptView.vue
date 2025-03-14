@@ -7,9 +7,9 @@
         </template>
         <div class="content-container">
           <div class="input-section">
-            <label for="theme-input" class="input-label">Theme</label>
             <OeInput
               id="theme-input"
+              label="Theme"
               :modelValue="theme"
               @update:modelValue="(value) => value !== undefined && vm.setTheme(value)"
               placeholder="Starbucks"

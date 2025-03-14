@@ -70,12 +70,12 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import OeButton from 'src/shared/views/components/buttons/OeButton.vue'
-import OeCard from 'src/shared/views/components/OeCard.vue'
-import OeDialog from 'src/shared/views/components/OeDialog.vue'
-import OeInput from 'src/shared/views/components/inputs/OeInput.vue'
-import OeMessage from 'src/shared/views/components/OeMessage.vue'
-import OeSpinner from 'src/shared/views/components/OeSpinner.vue'
+import OeButton from 'src/shared/views/components/base/OeButton.vue'
+import OeCard from 'src/shared/views/components/base/OeCard.vue'
+import OeDialog from 'src/shared/views/components/base/OeDialog.vue'
+import OeInput from 'src/shared/views/components/base/OeInput.vue'
+import OeMessage from 'src/shared/views/components/base/OeMessage.vue'
+import OeSpinner from 'src/shared/views/components/base/OeSpinner.vue'
 
 const count = ref(0)
 const inputValue = ref('')

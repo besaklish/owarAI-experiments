@@ -24,6 +24,7 @@ export class NormTwistScriptViewModel
   }
 
   setTheme(theme: string): void {
+    this._errorMessage.next('')
     this._theme.next(theme)
   }
 

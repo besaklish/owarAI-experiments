@@ -120,16 +120,12 @@ import type { INormTwistScriptViewModel } from 'src/features/script.norm-twist/v
 import { useViewModelLifecycleHooks } from 'src/shared/views/composables/useViewModelLifecycleHools'
 import { useObservableProps } from 'src/shared/views/composables/useObservableProps'
 
-// API key dialog control
 const showSetApiKeyDialog = ref(true)
 
-// Get the view model from the DI container
 const vm = diContainer.get<INormTwistScriptViewModel>(NormTwistScriptTypes.ViewModel)
 
-// Set up view model lifecycle hooks
 useViewModelLifecycleHooks(vm)
 
-// Bind to view model observable properties
 const theme = useObservableProps(vm, 'theme$')
 const errorMessage = useObservableProps(vm, 'errorMessage$')
 const isBusy = useObservableProps(vm, 'isBusy$')

@@ -1,81 +1,126 @@
 <template>
   <SimpleLayout>
     <div class="norm-twist-container">
-      <Card>
-        <template #title>
-          <h1 style="text-align: center; margin: 0">Norm Twist Script Generator</h1>
+      <OeCard>
+        <template #header>
+          <h1 class="page-title">Norm Twist Script Generator</h1>
         </template>
-        <template #content>
-          <div style="display: flex; flex-direction: column; gap: 20px">
-            <div>
-              <label for="theme-input" style="display: block; font-weight: bold; margin-bottom: 8px"
-                >Theme</label
-              >
-              <InputText
-                id="theme-input"
-                :model-value="theme"
-                @update:model-value="vm.setTheme($event as string)"
-                placeholder="Starbucks"
-                style="width: 100%"
-              />
+        <div class="content-container">
+          <div class="input-section">
+            <label for="theme-input" class="input-label">Theme</label>
+            <OeInput
+              id="theme-input"
+              :modelValue="theme"
+              @update:modelValue="(value) => value !== undefined && vm.setTheme(value)"
+              placeholder="Starbucks"
+            />
 
-              <Message
-                v-if="errorMessage"
-                severity="error"
-                style="width: 100%; margin-top: 10px; margin-bottom: 5px"
-              >
-                {{ errorMessage }}
-              </Message>
-            </div>
-
-            <div>
-              <Button
-                label="Generate Script"
-                icon="pi pi-bolt"
-                :loading="isBusy"
-                :disabled="isBusy"
-                @click="vm.generateScript()"
-                style="width: 100%"
-              />
-            </div>
-
-            <div
-              class="script-output"
-              style="background-color: #f8f9fa; border-radius: 6px; padding: 16px"
-            >
-              <div v-if="isBusy" style="display: flex; justify-content: center; width: 100%">
-                <ProgressSpinner />
-              </div>
-
-              <Panel v-else-if="generatedScript" class="script-content" style="width: 100%">
-                <pre>{{ generatedScript }}</pre>
-              </Panel>
-
-              <Message v-else severity="info" style="width: 100%; margin: 10px 0">
-                Your generated script will appear here
-              </Message>
-            </div>
+            <OeMessage
+              v-if="errorMessage"
+              severity="error"
+              :text="errorMessage"
+              class="error-message"
+            />
           </div>
-        </template>
-      </Card>
+
+          <div class="button-section">
+            <OeButton
+              label="Generate Script"
+              :loading="isBusy"
+              :disabled="isBusy"
+              @click="vm.generateScript()"
+            />
+          </div>
+
+          <div class="script-output">
+            <div v-if="isBusy" class="spinner-container">
+              <OeSpinner label="Generating script..." />
+            </div>
+
+            <OeCard v-else-if="generatedScript" class="script-content">
+              <pre>{{ generatedScript }}</pre>
+            </OeCard>
+
+            <OeMessage
+              v-else
+              severity="info"
+              text="Your generated script will appear here"
+              class="info-message"
+            />
+          </div>
+        </div>
+      </OeCard>
     </div>
   </SimpleLayout>
   <SetApiKeyDialog v-model="showSetApiKeyDialog" />
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .norm-twist-container {
   max-width: 800px;
   margin: 0 auto;
   padding: 2rem;
 }
 
-.script-content {
-  font-family: monospace;
+.page-title {
+  text-align: center;
+  margin: 0;
+  font-size: 1.8rem;
+  color: #5e35b1;
+  text-shadow: 1px 1px 0 #e0e0ff;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.input-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input-label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 4px;
+  color: #555;
+}
+
+.error-message {
+  margin-top: 10px;
+}
+
+.button-section {
+  display: flex;
+  justify-content: center;
 }
 
 .script-output {
+  background-color: #f8f9fa;
+  border-radius: 16px;
+  padding: 20px;
   min-height: 300px;
+  border: 2px dashed #ccc;
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+}
+
+.script-content {
+  width: 100%;
+  font-family: monospace;
+}
+
+.info-message {
+  margin: 10px 0;
 }
 
 pre {
@@ -88,12 +133,11 @@ pre {
 import SimpleLayout from 'src/shared/views/layouts/SimpleLayout.vue'
 import { ref } from 'vue'
 import SetApiKeyDialog from 'src/shared/llm/views/components/SetApiKeyDialog.vue/SetLlmApiKeyDialog.vue'
-import Card from 'primevue/card'
-import InputText from 'primevue/inputtext'
-import Button from 'primevue/button'
-import Panel from 'primevue/panel'
-import Message from 'primevue/message'
-import ProgressSpinner from 'primevue/progressspinner'
+import OeCard from 'src/shared/views/components/base/OeCard.vue'
+import OeInput from 'src/shared/views/components/base/OeInput.vue'
+import OeButton from 'src/shared/views/components/base/OeButton.vue'
+import OeMessage from 'src/shared/views/components/base/OeMessage.vue'
+import OeSpinner from 'src/shared/views/components/base/OeSpinner.vue'
 import { diContainer } from 'src/di/inversify.config'
 import { NormTwistScriptTypes } from 'src/features/script.norm-twist/di/NormTwistScriptTypes'
 import type { INormTwistScriptViewModel } from 'src/features/script.norm-twist/viewModels/INormTwistScriptViewModel'

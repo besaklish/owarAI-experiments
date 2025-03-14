@@ -7,7 +7,7 @@ import type { IViewModel } from 'src/shared/viewModels/interface/IViewModel'
 
 @injectable()
 export abstract class ViewModelBase implements IViewModel {
-  private _isBusy: BehaviorSubject<boolean> = new BehaviorSubject(false)
+  protected _isBusy: BehaviorSubject<boolean> = new BehaviorSubject(false)
   public isBusy$ = this._isBusy.asObservable()
 
   private _subscriptions: ISubscription[] = []

@@ -116,7 +116,7 @@ import OeMessage from 'src/shared/views/components/base/OeMessage.vue'
 import OeSpinner from 'src/shared/views/components/base/OeSpinner.vue'
 import { diContainer } from 'src/di/inversify.config'
 import { NormTwistScriptTypes } from 'src/features/script.norm-twist/di/NormTwistScriptTypes'
-import type { INormTwistScriptViewModel } from 'src/features/script.norm-twist/viewModels/INormTwistScriptViewModel'
+import type { INormTwistScriptViewModel } from 'src/features/script.norm-twist/interfaces/viewModels/INormTwistScriptViewModel'
 import { useViewModelLifecycleHooks } from 'src/shared/views/composables/useViewModelLifecycleHools'
 import { useObservableProps } from 'src/shared/views/composables/useObservableProps'
 

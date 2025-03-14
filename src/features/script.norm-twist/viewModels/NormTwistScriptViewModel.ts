@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs'
 import { err, ok, type Result } from 'src/shared/result/Result'
 import { ViewModelBase } from 'src/shared/viewModels/base/ViewModelBase'
 import type { IViewModel } from 'src/shared/viewModels/interface/IViewModel'
-import type { INormTwistScriptViewModel } from 'src/features/script.norm-twist/viewModels/INormTwistScriptViewModel'
+import type { INormTwistScriptViewModel } from 'src/features/script.norm-twist/interfaces/viewModels/INormTwistScriptViewModel'
 
 @injectable()
 export class NormTwistScriptViewModel

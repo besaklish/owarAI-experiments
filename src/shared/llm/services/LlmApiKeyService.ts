@@ -1,5 +1,5 @@
 import { injectable } from 'inversify'
-import type { ILlmApiKeyService } from 'src/shared/llm/interfaces/ILlmApiKeyService'
+import type { ILlmApiKeyService } from 'src/shared/llm/interfaces/services/ILlmApiKeyService'
 import { err, ok, type Result } from 'src/shared/result/Result'
 
 @injectable()

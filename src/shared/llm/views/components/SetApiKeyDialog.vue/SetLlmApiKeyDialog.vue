@@ -53,7 +53,7 @@
 <script setup lang="ts">
 import { diContainer } from 'src/di/inversify.config'
 import { LlmTypes } from 'src/shared/llm/di/LlmTypes'
-import type { ILlmApiKeyViewModel } from 'src/shared/llm/interfaces/ILlmApiKeyViewModel'
+import type { ILlmApiKeyViewModel } from 'src/shared/llm/interfaces/viewModels/ILlmApiKeyViewModel'
 import { useObservableProps } from 'src/shared/views/composables/useObservableProps'
 import { useViewModelLifecycleHooks } from 'src/shared/views/composables/useViewModelLifecycleHools'
 import OeDialog from 'src/shared/views/components/base/OeDialog.vue'

@@ -4,11 +4,14 @@ import type { ObservableProps } from 'src/shared/viewModels/interface/Observable
 
 export interface ILlmApiKeyViewModelProps {
   apiKey: string
-  errorMessage: string
+  apiKeyErrorMessage: string
+  shouldNotifyUser: boolean
+  llmErrorMessage: string
 }
 
 export interface ILlmApiKeyViewModel extends IViewModel, ObservableProps<ILlmApiKeyViewModelProps> {
   validateApiKey(apiKey: string): boolean
   setApiKey(apiKey: string): void
   saveApiKeyIfValid(): Result<void>
+  setShouldNotifyUser(shouldNotifyUser: boolean): void
 }

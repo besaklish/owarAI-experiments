@@ -9,10 +9,17 @@ import { LlmTypes } from 'src/shared/llm/di/LlmTypes'
 import type { ILlmApiKeyService } from 'src/shared/llm/interfaces/services/ILlmApiKeyService'
 import { ok, err, type Result } from 'src/shared/result/Result'
 import type { z } from 'zod'
+import { EventAggregatorTypes } from 'src/shared/eventAggregator/di/EventAggregatorTypes'
+import type { IEventAggregator } from 'src/shared/eventAggregator/interfaces/IEventAggregator'
+import { ThrowLlmErrorEvent } from 'src/shared/llm/events/ThrowLlmErrorEvent'
+import { LlmUnexpectedError } from 'src/shared/llm/errors/LlmUnexpectedError'
 
 @injectable()
 export class LlmApiService implements ILlmApiService {
-  constructor(@inject(LlmTypes.ApiKeyService) private apiKeyService: ILlmApiKeyService) {}
+  constructor(
+    @inject(EventAggregatorTypes.EventAggregator) private ea: IEventAggregator,
+    @inject(LlmTypes.ApiKeyService) private apiKeyService: ILlmApiKeyService,
+  ) {}
 
   async callWithTextFormat<T extends z.ZodType<unknown, z.ZodTypeDef, unknown>>(
     request: OpenAITextFormatRequest,
@@ -40,6 +47,23 @@ export class LlmApiService implements ILlmApiService {
 
       return ok(response.output_parsed as z.infer<T>)
     } catch (error) {
+      // TODO: Replace these if statement with more simple and concise logic
+      // Such as using Zod or separating this logic to a function
+      if (
+        error &&
+        typeof error === 'object' &&
+        'status' in error &&
+        'error' in error &&
+        typeof error.error === 'object' &&
+        error.error != null &&
+        'message' in error.error &&
+        typeof error.error.message === 'string'
+      ) {
+        this.ea.publish(
+          new ThrowLlmErrorEvent(new LlmUnexpectedError(error.error.message, { cause: error })),
+        )
+      }
+
       return err(error instanceof Error ? error : new Error(String(error)))
     }
   }

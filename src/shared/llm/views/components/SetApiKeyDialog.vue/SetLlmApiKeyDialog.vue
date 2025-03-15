@@ -2,12 +2,15 @@
   <OeDialog
     header="Set API Key"
     :modelValue="modelValue"
-    @update:modelValue="emit('update:modelValue', $event)"
+    @update:modelValue="vm.setShouldNotifyUser($event)"
     variant="info"
   >
     <div class="oe-api-key-dialog">
       <div class="oe-api-key-dialog__instruction">
         You need OpenAI's API key to use this application.
+      </div>
+      <div v-if="llmErrorMessage" class="oe-api-key-dialog__instruction">
+        {{ llmErrorMessage }}
       </div>
       <OeInput
         id="api-key"
@@ -16,7 +19,7 @@
         @update:modelValue="(value) => value !== undefined && vm.setApiKey(value)"
         placeholder="sk-"
         type="password"
-        :errorMessage="errorMessage"
+        :errorMessage="apiKeyErrorMessage"
       />
       <div class="oe-api-key-dialog__actions">
         <OeButton label="Close" @click="handleClose" variant="primary" />
@@ -59,8 +62,9 @@ import { useViewModelLifecycleHooks } from 'src/shared/views/composables/useView
 import OeDialog from 'src/shared/views/components/base/OeDialog.vue'
 import OeButton from 'src/shared/views/components/base/OeButton.vue'
 import OeInput from 'src/shared/views/components/base/OeInput.vue'
+import { watch } from 'vue'
 
-defineProps<{
+const props = defineProps<{
   modelValue: boolean
 }>()
 
@@ -71,13 +75,20 @@ const emit = defineEmits<{
 const vm = diContainer.get<ILlmApiKeyViewModel>(LlmTypes.ApiKeyViewModel)
 useViewModelLifecycleHooks(vm)
 const apiKey = useObservableProps(vm, 'apiKey$')
-const errorMessage = useObservableProps(vm, 'errorMessage$')
+const apiKeyErrorMessage = useObservableProps(vm, 'apiKeyErrorMessage$')
+const shouldNotifyUser = useObservableProps(vm, 'shouldNotifyUser$')
+const llmErrorMessage = useObservableProps(vm, 'llmErrorMessage$')
+vm.setShouldNotifyUser(props.modelValue)
 
 const handleClose = () => {
   const saveApiKeyResult = vm.saveApiKeyIfValid()
 
   if (saveApiKeyResult.isOk) {
-    emit('update:modelValue', false)
+    vm.setShouldNotifyUser(false)
   }
 }
+
+watch(shouldNotifyUser, (value) => {
+  emit('update:modelValue', value)
+})
 </script>

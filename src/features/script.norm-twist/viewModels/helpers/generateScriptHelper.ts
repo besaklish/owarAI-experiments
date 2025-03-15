@@ -78,11 +78,13 @@ export const generateScript = async (
   </RawOutputFormat>
 
   <ScriptFormat>
-  ボケ: <セリフ>
+    <状況 optional />
 
-  ツッ: <セリフ>
+    ボケ: <セリフ>
 
-  ...
+    ツッ: <セリフ>
+
+    ...
   </ScriptFormat>
 
   <Theme>

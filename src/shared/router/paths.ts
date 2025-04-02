@@ -3,4 +3,7 @@ export const paths = {
   script: {
     normTwist: '/script-generator/norm-twist',
   },
+  dynamicUI: {
+    dynamicUI: '/dynamic-ui',
+  },
 }

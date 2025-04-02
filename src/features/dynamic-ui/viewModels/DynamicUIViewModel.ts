@@ -55,6 +55,7 @@ export class DynamicUIViewModel extends ViewModelBase implements IDynamicUIViewM
     8. It should be one div element as a parent, containing child elements. There should not be script tag or style tag but you can use inline CSS styles and inline JavaScript as attributes of elements.
 
     Some ideas:
+    - Simulate real world scenarios (SNS, ECommerce, News, Finance, Sports, etc) of web experience but in an unexpected way
     - Elements that move or change when hovered
     - Unusual form inputs with funny validations
     - Strange visual transformations

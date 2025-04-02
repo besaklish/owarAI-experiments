@@ -1,3 +1,3 @@
 export const DynamicUITypes = {
-  ViewModel: Symbol.for('DynamicUIViewModel'),
+  DynamicUIViewModel: Symbol.for('IDynamicUIViewModel'),
 }

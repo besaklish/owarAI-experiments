@@ -97,7 +97,7 @@ import { useObservableProps } from 'src/shared/views/composables/useObservablePr
 import { ref } from 'vue'
 import SetApiKeyDialog from 'src/shared/llm/views/components/SetApiKeyDialog.vue/SetLlmApiKeyDialog.vue'
 
-const vm = diContainer.get<IDynamicUIViewModel>(DynamicUITypes.ViewModel)
+const vm = diContainer.get<IDynamicUIViewModel>(DynamicUITypes.DynamicUIViewModel)
 
 useViewModelLifecycleHooks(vm)
 

@@ -4,5 +4,5 @@ import type { IDynamicUIViewModel } from 'src/features/dynamic-ui/interfaces/vie
 import { DynamicUIViewModel } from 'src/features/dynamic-ui/viewModels/DynamicUIViewModel'
 
 export const dynamicUiModule = new ContainerModule((options) => {
-  options.bind<IDynamicUIViewModel>(DynamicUITypes.ViewModel).to(DynamicUIViewModel)
+  options.bind<IDynamicUIViewModel>(DynamicUITypes.DynamicUIViewModel).to(DynamicUIViewModel)
 })

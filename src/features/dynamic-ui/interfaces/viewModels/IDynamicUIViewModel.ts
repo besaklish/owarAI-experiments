@@ -10,5 +10,5 @@ export interface IDynamicUIViewModelProps {
 export interface IDynamicUIViewModel extends IViewModel, ObservableProps<IDynamicUIViewModelProps> {
   errorMessage$: Observable<string>
   generatedScript$: Observable<string>
-  generateInnerHtml(): Promise<string>
+  generateInnerHtml(): Promise<void>
 }

@@ -19,60 +19,23 @@ export class DynamicUIViewModel extends ViewModelBase implements IDynamicUIViewM
     super()
   }
 
-  async generateInnerHtml(): Promise<string> {
+  async generateInnerHtml(): Promise<void> {
+    if (this._isBusy.value) {
+      return
+    }
+
     this.setIsBusy(true)
 
-    try {
-      const dynamicHtmlResult = await this.generateDynamicHtml()
+    const dynamicHtmlResult = await this.generateDynamicHtml()
 
-      if (dynamicHtmlResult.isOk) {
-        this._generatedScript.next(dynamicHtmlResult.value)
-        this._errorMessage.next('')
-        this.setIsBusy(false)
-        return dynamicHtmlResult.value
-      } else {
-        // If LLM fails, fallback to the original static HTML
-        const randomErrorMessages = [
-          'Call the police!',
-          'Something went wrong!',
-          'Oops! Try again.',
-          'Unexpected error occurred.',
-          'Please contact support.',
-        ]
-
-        const randomErrorMessage =
-          randomErrorMessages[Math.floor(Math.random() * randomErrorMessages.length)]
-        this._errorMessage.next(randomErrorMessage)
-
-        const htmlContent = `
-          <div style="transform: rotate(180deg);">
-            <form>
-              <label for="username">Username:</label>
-              <input type="text" id="username" name="username"><br><br>
-              <label for="password">Password:</label>
-              <input type="password" id="password" name="password"><br><br>
-              <input type="submit" value="Submit">
-            </form>
-          </div>
-        `
-        this._generatedScript.next(htmlContent)
-        this.setIsBusy(false)
-        return htmlContent
-      }
-    } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred'
-      this._errorMessage.next(errorMessage)
-      this.setIsBusy(false)
-
-      // Return fallback HTML in case of error
-      const fallbackHtml = `
-        <div style="transform: rotate(180deg);">
-          <p>Failed to generate dynamic HTML: ${errorMessage}</p>
-        </div>
-      `
-      this._generatedScript.next(fallbackHtml)
-      return fallbackHtml
+    if (dynamicHtmlResult.isOk) {
+      this._generatedScript.next(dynamicHtmlResult.value)
+      this._errorMessage.next('')
+    } else {
+      this._errorMessage.next(dynamicHtmlResult.error.message)
     }
+
+    this.setIsBusy(false)
   }
 
   private async generateDynamicHtml() {

@@ -27,7 +27,7 @@
 
           <div class="oe-dynamic-ui__output">
             <div v-if="isBusy" class="oe-dynamic-ui__spinner">
-              <OeSpinner label="Generating dynamic HTML..." />
+              <OeSpinner label="Generating dynamic UI..." />
             </div>
 
             <div v-else-if="errorMessage" class="oe-dynamic-ui__error">

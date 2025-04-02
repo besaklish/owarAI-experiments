@@ -11,8 +11,17 @@
               label="Generate Dynamic UI"
               :loading="isBusy"
               :disabled="isBusy"
-              @click="vm.generateInnerHtml()"
+              @click="vm.generateInnerHtml(false)"
               variant="primary"
+            />
+            <OeButton
+              v-if="generatedScript"
+              label="Revise UI"
+              :loading="isBusy"
+              :disabled="isBusy"
+              @click="vm.generateInnerHtml(true)"
+              variant="secondary"
+              class="oe-dynamic-ui__revise-button"
             />
           </div>
 
@@ -55,6 +64,11 @@
 .oe-dynamic-ui__actions {
   display: flex;
   justify-content: center;
+  gap: $oe-spacing-md;
+}
+
+.oe-dynamic-ui__revise-button {
+  margin-left: $oe-spacing-sm;
 }
 
 .oe-dynamic-ui__output {

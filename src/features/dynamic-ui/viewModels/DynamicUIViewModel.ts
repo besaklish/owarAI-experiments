@@ -19,14 +19,17 @@ export class DynamicUIViewModel extends ViewModelBase implements IDynamicUIViewM
     super()
   }
 
-  async generateInnerHtml(): Promise<void> {
+  async generateInnerHtml(revise = false): Promise<void> {
     if (this._isBusy.value) {
       return
     }
 
     this.setIsBusy(true)
 
-    const dynamicHtmlResult = await this.generateDynamicHtml()
+    // Only pass previousHtml if revise is true and there's existing content
+    const previousHtml =
+      revise && this._generatedScript.value ? this._generatedScript.value : undefined
+    const dynamicHtmlResult = await this.generateDynamicHtml(previousHtml)
 
     if (dynamicHtmlResult.isOk) {
       this._generatedScript.next(dynamicHtmlResult.value)
@@ -38,8 +41,8 @@ export class DynamicUIViewModel extends ViewModelBase implements IDynamicUIViewM
     this.setIsBusy(false)
   }
 
-  private async generateDynamicHtml() {
-    const prompt = `
+  private async generateDynamicHtml(previousHtml?: string) {
+    const basePrompt = `
     Create a dynamic and interactive HTML snippet that does something unexpected but safe when rendered in a browser.
     Be creative and playful. The HTML should:
     1. Have visual or interactive elements that surprise the user
@@ -58,6 +61,27 @@ export class DynamicUIViewModel extends ViewModelBase implements IDynamicUIViewM
     The HTML should be valid and safe to render in a browser.
     `
 
+    const revisionPrompt = previousHtml
+      ? `
+    Revise and improve the following HTML snippet. Keep the core functionality but make it more interesting,
+    creative, or visually appealing. You can change colors, animations, interactions, or add new elements.
+
+    Current HTML:
+    \`\`\`html
+    ${previousHtml}
+    \`\`\`
+
+    Your revised HTML should:
+    1. Maintain or enhance the interactive elements
+    2. Use CSS for improved visual effects
+    3. Be contained within a single div element
+    4. Not contain any harmful scripts or dangerous code
+    5. Be visually unusual but still functional
+
+    The HTML should be valid and safe to render in a browser.
+    `
+      : basePrompt
+
     const DynamicHtmlSchema = z.object({
       description: z.string(),
       htmlContent: z.string(),
@@ -66,7 +90,7 @@ export class DynamicUIViewModel extends ViewModelBase implements IDynamicUIViewM
     try {
       const result = await this._llmApiService.callWithTextFormat<typeof DynamicHtmlSchema>({
         model: 'gpt-4o',
-        input: prompt,
+        input: previousHtml ? revisionPrompt : basePrompt,
         temperature: 0.8,
         max_output_tokens: 1000,
         text: {

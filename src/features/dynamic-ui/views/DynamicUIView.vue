@@ -25,7 +25,7 @@
               <OeMessage severity="error" :text="errorMessage" />
             </div>
 
-            <div v-if="generatedScript" class="oe-dynamic-ui__script">
+            <div v-else-if="generatedScript" class="oe-dynamic-ui__script">
               <div v-html="generatedScript"></div>
             </div>
           </div>

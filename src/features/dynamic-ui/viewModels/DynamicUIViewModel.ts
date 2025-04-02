@@ -52,7 +52,7 @@ export class DynamicUIViewModel extends ViewModelBase implements IDynamicUIViewM
     5. Be visually unusual but still functional
     6. Never use the direct words like "funny", "joke", "humor", "laugh", "silly", "comedy", "amusing", "hilarious", "witty", "whimsical", "playful", or any other similar words in the HTML content because they are too direct and not creative enough.
     7. Make it interactive and engaging, so the user can play with it, both with mobile and desktop devices.
-    8. It should be HTML element, not using head or html tags. You can use inline CSS styles and inline JavaScript if needed.
+    8. It should be one div element as a parent, containing child elements. There should not be script tag or style tag but you can use inline CSS styles and inline JavaScript as attributes of elements.
 
     Some ideas:
     - Elements that move or change when hovered

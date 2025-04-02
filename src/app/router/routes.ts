@@ -7,5 +7,10 @@ export const routes = [
     path: paths.script.normTwist,
     component: () => import('src/features/script.norm-twist/views/NormTwistScriptView.vue'),
   },
+  {
+    path: paths.dynamicUI.funnyDomManipulation,
+    component: () =>
+      import('src/features/funny-dom-manipulation/views/FunnyDomManipulationView.vue'),
+  },
   { path: '/:pathMatch(.*)*', component: NotFoundView },
 ]

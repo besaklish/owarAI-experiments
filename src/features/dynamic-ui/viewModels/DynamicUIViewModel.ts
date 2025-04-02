@@ -1,17 +1,14 @@
 import { inject, injectable } from 'inversify'
 import { BehaviorSubject } from 'rxjs'
 import { ViewModelBase } from 'src/shared/viewModels/base/ViewModelBase'
-import type { IFunnyDomManipulationViewModel } from 'src/features/funny-dom-manipulation/interfaces/viewModels/IFunnyDomManipulationViewModel'
+import type { IDynamicUIViewModel } from 'src/features/dynamic-ui/interfaces/viewModels/IDynamicUIViewModel'
 import { LlmTypes } from 'src/shared/llm/di/LlmTypes'
 import type { ILlmApiService } from 'src/shared/llm/interfaces/services/ILlmApiService'
 import { z } from 'zod'
 import { err, ok } from 'src/shared/result/Result'
 
 @injectable()
-export class FunnyDomManipulationViewModel
-  extends ViewModelBase
-  implements IFunnyDomManipulationViewModel
-{
+export class DynamicUIViewModel extends ViewModelBase implements IDynamicUIViewModel {
   private _errorMessage: BehaviorSubject<string> = new BehaviorSubject<string>('')
   public errorMessage$ = this._errorMessage.asObservable()
 
@@ -26,13 +23,13 @@ export class FunnyDomManipulationViewModel
     this.setIsBusy(true)
 
     try {
-      const funnyHtmlResult = await this.generateFunnyHtml()
+      const dynamicHtmlResult = await this.generateDynamicHtml()
 
-      if (funnyHtmlResult.isOk) {
-        this._generatedScript.next(funnyHtmlResult.value)
+      if (dynamicHtmlResult.isOk) {
+        this._generatedScript.next(dynamicHtmlResult.value)
         this._errorMessage.next('')
         this.setIsBusy(false)
-        return funnyHtmlResult.value
+        return dynamicHtmlResult.value
       } else {
         // If LLM fails, fallback to the original static HTML
         const randomErrorMessages = [
@@ -70,7 +67,7 @@ export class FunnyDomManipulationViewModel
       // Return fallback HTML in case of error
       const fallbackHtml = `
         <div style="transform: rotate(180deg);">
-          <p>Failed to generate funny HTML: ${errorMessage}</p>
+          <p>Failed to generate dynamic HTML: ${errorMessage}</p>
         </div>
       `
       this._generatedScript.next(fallbackHtml)
@@ -78,9 +75,9 @@ export class FunnyDomManipulationViewModel
     }
   }
 
-  private async generateFunnyHtml() {
+  private async generateDynamicHtml() {
     const prompt = `
-    Create a funny and quirky HTML snippet that does something unexpected but safe when rendered in a browser.
+    Create a dynamic and interactive HTML snippet that does something unexpected but safe when rendered in a browser.
     Be creative and playful. The HTML should:
     1. Have visual or interactive elements that surprise the user
     2. Use CSS for visual effects
@@ -98,21 +95,21 @@ export class FunnyDomManipulationViewModel
     The HTML should be valid and safe to render in a browser.
     `
 
-    const FunnyHtmlSchema = z.object({
+    const DynamicHtmlSchema = z.object({
       description: z.string(),
       htmlContent: z.string(),
     })
 
     try {
-      const result = await this._llmApiService.callWithTextFormat<typeof FunnyHtmlSchema>({
+      const result = await this._llmApiService.callWithTextFormat<typeof DynamicHtmlSchema>({
         model: 'gpt-4o',
         input: prompt,
         temperature: 0.8,
         max_output_tokens: 1000,
         text: {
           format: {
-            schema: FunnyHtmlSchema,
-            name: 'funny_html',
+            schema: DynamicHtmlSchema,
+            name: 'dynamic_html',
           },
         },
       })

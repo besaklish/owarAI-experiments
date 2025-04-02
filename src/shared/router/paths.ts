@@ -4,6 +4,6 @@ export const paths = {
     normTwist: '/script-generator/norm-twist',
   },
   dynamicUI: {
-    funnyDomManipulation: '/dynamic-ui/funny-dom-manipulation',
+    dynamicUI: '/dynamic-ui',
   },
 }

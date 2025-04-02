@@ -8,9 +8,8 @@ export const routes = [
     component: () => import('src/features/script.norm-twist/views/NormTwistScriptView.vue'),
   },
   {
-    path: paths.dynamicUI.funnyDomManipulation,
-    component: () =>
-      import('src/features/funny-dom-manipulation/views/FunnyDomManipulationView.vue'),
+    path: paths.dynamicUI.dynamicUI,
+    component: () => import('src/features/dynamic-ui/views/DynamicUIView.vue'),
   },
   { path: '/:pathMatch(.*)*', component: NotFoundView },
 ]

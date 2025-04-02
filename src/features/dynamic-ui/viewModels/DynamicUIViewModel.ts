@@ -50,6 +50,9 @@ export class DynamicUIViewModel extends ViewModelBase implements IDynamicUIViewM
     3. Be contained within a single div element
     4. Not contain any harmful scripts or dangerous code
     5. Be visually unusual but still functional
+    6. Never use the direct words like "funny", "joke", "humor", "laugh", "silly", "comedy", "amusing", "hilarious", "witty", "whimsical", "playful", or any other similar words in the HTML content because they are too direct and not creative enough.
+    7. Make it interactive and engaging, so the user can play with it, both with mobile and desktop devices.
+    8. It should be HTML element, not using head or html tags. You can use inline CSS styles and inline JavaScript if needed.
 
     Some ideas:
     - Elements that move or change when hovered
@@ -65,6 +68,12 @@ export class DynamicUIViewModel extends ViewModelBase implements IDynamicUIViewM
     - Unexpected combinations of HTML elements
     - Playful use of images or icons
     - Unusual use of text or typography
+    - Reverse, flipped, or mirrored elements
+    - Unexpected movement or animation
+    - Not obeying the laws of physics
+    - Elements that imitate real-world objects in unexpected ways
+    - Taking advantage of the browser's API
+    - Taking advantage of the events that the browser emits
 
     Why people laugh:
     **The most important point is that "being safe and harmless alone is not enough; laughter only emerges when we recognize the gap between something unexpected yet harmless."**

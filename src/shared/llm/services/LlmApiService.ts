@@ -21,7 +21,7 @@ export class LlmApiService implements ILlmApiService {
     @inject(LlmTypes.ApiKeyService) private apiKeyService: ILlmApiKeyService,
   ) {}
 
-  async callWithTextFormat<T extends z.ZodType<unknown, z.ZodTypeDef, unknown>>(
+  async callWithTextFormat<T extends z.ZodTypeAny>(
     request: OpenAITextFormatRequest,
   ): Promise<Result<z.infer<T>, Error>> {
     try {

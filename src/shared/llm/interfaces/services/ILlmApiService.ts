@@ -13,14 +13,14 @@ export interface OpenAILlmRequest {
 export interface OpenAITextFormatRequest extends OpenAILlmRequest {
   text: {
     format: {
-      schema: z.ZodType<unknown, z.ZodTypeDef, unknown>
+      schema: z.ZodTypeAny
       name: string
     }
   }
 }
 
 export interface ILlmApiService {
-  callWithTextFormat<T extends z.ZodType<unknown, z.ZodTypeDef, unknown>>(
+  callWithTextFormat<T extends z.ZodTypeAny>(
     request: OpenAITextFormatRequest,
   ): Promise<Result<z.infer<T>, Error>>
 }

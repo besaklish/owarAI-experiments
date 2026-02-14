@@ -1,18 +1,18 @@
-import { fileURLToPath } from 'node:url'
+import { fileURLToPath, URL } from 'node:url'
 import { defineConfig, configDefaults } from 'vitest/config'
-import viteConfig from './vite.config'
+import vue from '@vitejs/plugin-vue'
+import vueDevTools from 'vite-plugin-vue-devtools'
 
-export default defineConfig(async ({ mode }) => {
-  // Get the resolved Vite config
-  const resolvedViteConfig = await viteConfig({ mode, command: 'serve' })
-
-  // Return merged configuration
-  return {
-    ...resolvedViteConfig,
-    test: {
-      environment: 'jsdom',
-      exclude: [...configDefaults.exclude, 'e2e/**'],
-      root: fileURLToPath(new URL('./', import.meta.url)),
+export default defineConfig({
+  plugins: [vue(), vueDevTools()],
+  resolve: {
+    alias: {
+      src: fileURLToPath(new URL('./src', import.meta.url)),
     },
-  }
+  },
+  test: {
+    environment: 'jsdom',
+    exclude: [...configDefaults.exclude, 'e2e/**'],
+    root: fileURLToPath(new URL('./', import.meta.url)),
+  },
 })
